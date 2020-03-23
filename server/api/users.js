@@ -1,15 +1,10 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Stocks, Transactions} = require('../db/models')
+const {checkUser} = require('../utils')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll()
-    // console.log('users: ', users)
-    if (users) res.send(users)
-    else res.sendStatus(404)
-    // res.json(users)
-  } catch (err) {
-    next(err)
-  }
-})
+router.get('/:id/portfolio', checkUser, async (req, res, next) => {})
+
+router.get('/:id/transactions', checkUser, async (req, res, next) => {})
+
+router.put('/:id', checkUser, async (req, res, next) => {})
