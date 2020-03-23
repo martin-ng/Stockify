@@ -8,6 +8,12 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
@@ -16,8 +22,10 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+
   money: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 5000
   },
 
   salt: {
@@ -42,6 +50,11 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
+User.prototype.correctMoney = function() {
+  console.log(User.money)
+  // return User.money
+}
+
 /**
  * classMethods
  */
@@ -56,6 +69,10 @@ User.encryptPassword = function(plainText, salt) {
     .update(salt)
     .digest('hex')
 }
+
+User.beforeCreate(user => {
+  user.name = user.name[0].toUpperCase() + user.name.slice(1)
+})
 
 /**
  * Sequelize hooks
