@@ -16,6 +16,10 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  money: {
+    type: Sequelize.INTEGER
+  },
+
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -54,8 +58,12 @@ User.encryptPassword = function(plainText, salt) {
 }
 
 /**
- * hooks
+ * Sequelize hooks
  */
+
+/* Salting password will generate a unique password for each user and
+* store it into the database.
+*/
 const setSaltAndPassword = user => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()
