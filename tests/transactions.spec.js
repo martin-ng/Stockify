@@ -2,7 +2,7 @@ const {expect} = require('chai')
 const db = require('../server/db/index')
 const Transactions = db.model('transactions')
 
-describe('Transactions model', () => {
+xdescribe('Transactions model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -38,7 +38,6 @@ describe('Transactions model', () => {
       })
 
       it('transaction three has a date', () => {
-        //   console.log("transaction three: ", transactionThree.dataValues)
         expect(transactionThree.dataValues.datePurchased).to.be.equal(
           '2016-05-06'
         )

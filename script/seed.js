@@ -13,6 +13,20 @@ async function seed() {
       firstName: 'cody',
       lastName: 'pug',
       password: 'Abc123!@'
+    }),
+
+    User.create({
+      email: 'richestman@email.com',
+      firstName: 'richie',
+      lastName: 'rich',
+      password: 'abcsD123!@#'
+    }),
+
+    User.create({
+      email: 'poorestman@email.com',
+      firstName: 'notrichie',
+      lastName: 'notrich',
+      password: 'ABc123!@#'
     })
   ])
 
@@ -21,6 +35,18 @@ async function seed() {
       symbol: 'tsla',
       stockPrice: 10000,
       totalShares: 500
+    }),
+
+    Stocks.create({
+      symbol: 'amz',
+      stockPrice: 20000,
+      totalShares: 1000
+    }),
+
+    Stocks.create({
+      symbol: 'msft',
+      stockPrice: 5000,
+      totalShares: 250
     })
   ])
 
