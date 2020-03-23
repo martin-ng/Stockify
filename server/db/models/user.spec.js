@@ -9,24 +9,31 @@ describe('User model', () => {
     return db.sync({force: true})
   })
 
-  describe('instanceMethods', () => {
-    let cody
-
-    beforeEach(async () => {
-      cody = await User.create({
+  describe('column definitions and validations', () => {
+    it('has a "email", "name", and "money" amount', async () => {
+      const cody = await User.create({
         email: 'testuser@email.com',
-        password: 'abc123'
+        name: 'Cody',
+        money: 5000
       })
+      expect(cody.email).to.equal('testuser@email.com')
+      expect(cody.name).to.equal('Cody')
+      expect(cody.money).to.equal(5000)
     })
-    describe('correctPassword', () => {
-      // let cody
+  })
 
-      // beforeEach(async () => {
-      //   cody = await User.create({
-      //     email: 'testuser@email.com',
-      //     password: 'abc123'
-      //   })
-      // })
+  describe('instanceMethods', () => {
+    describe('correctPassword', () => {
+      let cody
+
+      beforeEach(async () => {
+        cody = await User.create({
+          email: 'testuser@email.com',
+          name: 'Cody',
+          password: 'abc123',
+          money: 5000
+        })
+      })
 
       it('returns true if the password is correct', () => {
         expect(cody.correctPassword('abc123')).to.be.equal(true)
@@ -35,10 +42,6 @@ describe('User model', () => {
       it('returns false if the password is incorrect', () => {
         expect(cody.correctPassword('bonez')).to.be.equal(false)
       })
-    }) // end describe('correctPassword')
-
-    describe('correctMoney', () => {
-      expect(cody.correctMoney(5000)).to.be.equal(true)
     })
   }) // end describe('instanceMethods')
 }) // end describe('User model')

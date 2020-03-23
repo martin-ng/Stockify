@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "firex",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Stock portfolio simulation app",
   "engines": {
     "node": ">= 7.0.0"
   },
