@@ -11,7 +11,7 @@ const Stocks = db.define('stocks', {
     allowNull: false,
     min: 0
   },
-  sharesAmount: {
+  totalShares: {
     type: Sequelize.INTEGER,
     allowNull: false,
     min: 1
