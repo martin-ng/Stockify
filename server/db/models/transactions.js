@@ -3,7 +3,9 @@ const db = require('../db')
 
 const Transactions = db.define('transactions', {
   datePurchased: {
-    type: Sequelize.DATE
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+    defaultValue: Sequelize.fn('now')
   }
 })
 
