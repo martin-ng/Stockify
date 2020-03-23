@@ -5,27 +5,57 @@ const db = require('../db')
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true,
+      msg: 'Must be a valid email!'
+    },
+    unique: {
+      args: true,
+      msg: 'Email address is already in use!'
+    }
   },
 
-  name: {
+  firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'Please enter a first name!'
+      }
+    }
+  },
+
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'Please enter a last name!'
+      }
+    }
   },
 
   password: {
     type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
+    },
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'Please enter a password!'
+      }
     }
   },
 
-  money: {
-    type: Sequelize.INTEGER,
-    defaultValue: 5000
+  cashBalance: {
+    type: Sequelize.DECIMAL(12, 2),
+    defaultValue: 5000,
+    min: 0
   },
 
   salt: {
@@ -35,29 +65,15 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
-  },
-  googleId: {
-    type: Sequelize.STRING
   }
 })
 
 module.exports = User
 
-/**
- * instanceMethods
- */
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-User.prototype.correctMoney = function() {
-  console.log(User.money)
-  // return User.money
-}
-
-/**
- * classMethods
- */
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }
@@ -71,12 +87,9 @@ User.encryptPassword = function(plainText, salt) {
 }
 
 User.beforeCreate(user => {
-  user.name = user.name[0].toUpperCase() + user.name.slice(1)
+  user.firstName = user.firstName[0].toUpperCase() + user.firstName.slice(1)
+  user.lastName = user.lastName[0].toUpperCase() + user.lastName.slice(1)
 })
-
-/**
- * Sequelize hooks
- */
 
 /* Salting password will generate a unique password for each user and
 * store it into the database.
