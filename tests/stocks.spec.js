@@ -16,7 +16,7 @@ xdescribe('Stocks', () => {
       })
 
       expect(stock.dataValues.symbol).to.be.equal('TSLA')
-      expect(stock.dataValues.stockPrice).to.be.equal(10000)
+      expect(stock.dataValues.stockPrice).to.be.equal((10000).toFixed(2))
       expect(stock.dataValues.totalShares).to.be.equal(5000)
     })
   })
