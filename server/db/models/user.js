@@ -7,8 +7,10 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmail: true,
-      msg: 'Must be a valid email!'
+      isEmail: {
+        args: true,
+        msg: 'Must be a valid email!'
+      }
     },
     unique: {
       args: true,
@@ -23,6 +25,11 @@ const User = db.define('user', {
       notEmpty: {
         args: true,
         msg: 'Please enter a first name!'
+      },
+      is: {
+        args: /^(?=[a-zA-Z]).{4,}$/,
+        msg:
+          'First name must contain only characters and a minimum of 4 characters '
       }
     }
   },
@@ -34,6 +41,11 @@ const User = db.define('user', {
       notEmpty: {
         args: true,
         msg: 'Please enter a last name!'
+      },
+      is: {
+        args: /^([a-zA-Z]).{2,}$/,
+        msg:
+          'Last name must contain only characters and a minimum of 2 characters '
       }
     }
   },
@@ -46,8 +58,13 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       notEmpty: {
-        args: true,
-        msg: 'Please enter a password!'
+        args: true
+        // msg: 'Please enter a password!'
+      },
+      is: {
+        args: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/,
+        msg:
+          'Password must contain at least one uppercase letter, one lowercase letter, one special character, a minimum of 8 characters, and a maximum of 20 characters'
       }
     }
   },
