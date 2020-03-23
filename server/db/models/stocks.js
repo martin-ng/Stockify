@@ -6,11 +6,13 @@ const Stocks = db.define('stocks', {
     type: Sequelize.STRING,
     allowNull: false
   },
+
   stockPrice: {
     type: Sequelize.DECIMAL(12, 2),
     allowNull: false,
     min: 0
   },
+
   totalShares: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -19,3 +21,7 @@ const Stocks = db.define('stocks', {
 })
 
 module.exports = Stocks
+
+Stocks.beforeCreate(stock => {
+  stock.symbol = stock.symbol.toUpperCase()
+})

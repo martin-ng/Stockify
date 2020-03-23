@@ -4,7 +4,7 @@ const {expect} = require('chai')
 const db = require('../server/db/index')
 const User = db.model('user')
 
-xdescribe('User model', () => {
+describe('User model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -18,10 +18,10 @@ xdescribe('User model', () => {
         password: 'Abc123!@'
       })
 
-      expect(cody.email).to.equal('cody@email.com')
-      expect(cody.firstName).to.equal('Cody')
-      expect(cody.lastName).to.equal('Pug')
-      expect(cody.cashBalance).to.equal((5000).toFixed(2))
+      expect(cody.dataValues.email).to.equal('cody@email.com')
+      expect(cody.dataValues.firstName).to.equal('Cody')
+      expect(cody.dataValues.lastName).to.equal('Pug')
+      expect(cody.dataValues.cashBalance).to.equal((5000).toFixed(2))
     })
   }) // end of column definitions and validations test
 
