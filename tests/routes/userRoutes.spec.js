@@ -9,23 +9,23 @@ const agent = require('supertest')(app)
 
 const seed = require('../../script/seed')
 
-describe('User Routes', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
-  })
+// describe('User Routes', () => {
+//   beforeEach(() => {
+//     return db.sync({force: true})
+//   })
 
-  // run seed file
-  describe('seed script in user routes', () => {
-    it('seeds successfully', seed)
-  })
+//   // run seed file
+//   describe('seed script in user routes', () => {
+//     it('seeds successfully', seed)
+//   })
 
-  describe('GET `/api/users/` route', () => {
-    it('gets all the stocks the user owns', async () => {
-      console.log('testing this test')
+//   describe('GET `/api/users/` route', () => {
+//     it('gets all the stocks the user owns', async () => {
+//       console.log('testing this test')
 
-      const response = await agent.get('/users/2/').expect(200)
-      console.log('response: ', response.body)
-      // expect(response).to.equal('promise resolved')
-    })
-  })
-})
+//       const response = await agent.get('/users/2/').expect(200)
+//       console.log('response: ', response.body)
+//       // expect(response).to.equal('promise resolved')
+//     })
+//   })
+// })

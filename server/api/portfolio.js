@@ -3,7 +3,7 @@ const {User, Stocks, Transactions} = require('../db/models')
 const {checkUser} = require('../utils')
 module.exports = router
 
-router.get('/', checkUser, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const stocks = await Stocks.findAll({
       where: {

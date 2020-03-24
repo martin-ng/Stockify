@@ -3,6 +3,7 @@ module.exports = router
 
 router.use('/users', require('./users'))
 router.use('/portfolio', require('./portfolio'))
+router.use('/transactions', require('./transactions'))
 
 // router.use('/stocks', require('./stocks'))
 
