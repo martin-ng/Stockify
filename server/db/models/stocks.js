@@ -21,6 +21,8 @@ const Stocks = db.define('stocks', {
 
 Stocks.beforeCreate(stock => {
   stock.symbol = stock.symbol.toUpperCase()
+  stock.companyName =
+    stock.companyName[0].toUpperCase() + stock.companyName.slice(1)
 })
 
 Stocks.getPortfolio = async function(userId) {
@@ -29,7 +31,9 @@ Stocks.getPortfolio = async function(userId) {
       userId
     }
   })
-  return stocks
+
+  let portfolio = stocks.map(stock => stock.dataValues)
+  return portfolio
 }
 
 // Stocks.updateTotal = async function(transaction) {
