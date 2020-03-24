@@ -1,15 +1,16 @@
 const {expect} = require('chai')
 const db = require('../../server/db/index')
 const Stocks = db.model('stocks')
-// const User = db.model('user')
+const User = db.model('user')
 
-const app = require('../../server/api')
+const app = require('../../server/index')
 const supertest = require('supertest')
+// const agent = supertest.agent(app)
 const agent = require('supertest')(app)
 
 const seed = require('../../script/seed')
 
-describe('User Routes', () => {
+xdescribe('Transactions Routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -17,6 +18,16 @@ describe('User Routes', () => {
   // run seed file
   describe('seed script in user routes', () => {
     it('seeds successfully', seed)
+  })
+
+  describe('Logged in user', () => {
+    let user
+    beforeEach(() => {
+      user = {
+        email: 'testuser@email.com'
+      }
+      req.login(user, err => (err ? next(err) : res.json(user)))
+    })
   })
 
   describe('GET `/api/portfolio` route', () => {

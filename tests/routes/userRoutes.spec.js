@@ -3,7 +3,7 @@ const db = require('../../server/db/index')
 const Stocks = db.model('stocks')
 const User = db.model('user')
 
-const app = require('../../server/api')
+const app = require('../../server/index')
 const supertest = require('supertest')
 const agent = require('supertest')(app)
 
@@ -19,12 +19,12 @@ describe('User Routes', () => {
     it('seeds successfully', seed)
   })
 
-  describe('GET `/api/users/:id/portfolio` route', () => {
+  describe('GET `/api/users/` route', () => {
     it('gets all the stocks the user owns', async () => {
       console.log('testing this test')
-      console.log(process.env)
-      // const response = await agent.get('/users/2/portfolio').expect(200)
-      // console.log("response: ", response)
+
+      const response = await agent.get('/users/2/').expect(200)
+      console.log('response: ', response.body)
       // expect(response).to.equal('promise resolved')
     })
   })
