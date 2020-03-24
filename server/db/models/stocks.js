@@ -19,8 +19,12 @@ const Stocks = db.define('stocks', {
   }
 })
 
-module.exports = Stocks
-
 Stocks.beforeCreate(stock => {
   stock.symbol = stock.symbol.toUpperCase()
 })
+
+// Stocks.updateTotal = async function(transaction) {
+//   const stocks =
+// }
+
+module.exports = Stocks
