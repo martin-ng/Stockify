@@ -33,20 +33,26 @@ async function seed() {
   const stocks = await Promise.all([
     Stocks.create({
       symbol: 'tsla',
-      stockPrice: 10000,
+      companyName: 'Tesla',
       totalShares: 500
     }),
 
     Stocks.create({
       symbol: 'amz',
-      stockPrice: 20000,
+      companyName: 'Amazon',
       totalShares: 1000
     }),
 
     Stocks.create({
       symbol: 'msft',
-      stockPrice: 5000,
+      companyName: 'Microsoft',
       totalShares: 250
+    }),
+
+    Stocks.create({
+      symbol: 'awk',
+      companyName: 'Awkward',
+      totalShares: 10
     })
   ])
 

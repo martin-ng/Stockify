@@ -1,22 +1,22 @@
 const {expect} = require('chai')
-const db = require('../server/db/index')
+const db = require('../../server/db/index')
 const Stocks = db.model('stocks')
 
-xdescribe('Stocks', () => {
+describe('Stocks', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('column definitions and validations', () => {
-    it('has a "symbol", "stock price", "shares amount"', async () => {
+    it('has a `symbol`, `company name`, and `total shares`', async () => {
       const stock = await Stocks.create({
         symbol: 'tsla',
-        stockPrice: 10000,
+        companyName: 'Tesla',
         totalShares: 5000
       })
 
       expect(stock.dataValues.symbol).to.be.equal('TSLA')
-      expect(stock.dataValues.stockPrice).to.be.equal((10000).toFixed(2))
+      expect(stock.dataValues.companyName).to.be.equal('Tesla')
       expect(stock.dataValues.totalShares).to.be.equal(5000)
     })
   })

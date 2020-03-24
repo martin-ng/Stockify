@@ -10,8 +10,8 @@ const Transactions = require('./transactions')
  */
 
 User.hasMany(Stocks)
-Stocks.belongsTo(User)
 User.hasMany(Transactions)
+Stocks.belongsTo(User)
 Transactions.hasOne(Stocks)
 
 /**

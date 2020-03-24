@@ -7,10 +7,9 @@ const Stocks = db.define('stocks', {
     allowNull: false
   },
 
-  stockPrice: {
-    type: Sequelize.DECIMAL(12, 2),
-    allowNull: false,
-    min: 0
+  companyName: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
 
   totalShares: {
