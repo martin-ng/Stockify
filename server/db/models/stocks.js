@@ -31,7 +31,6 @@ Stocks.getPortfolio = async function(userId) {
       userId
     }
   })
-
   let portfolio = stocks.map(stock => stock.dataValues)
   return portfolio
 }

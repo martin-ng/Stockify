@@ -9,6 +9,7 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
+      id: 1,
       email: 'cody@email.com',
       firstName: 'cody',
       lastName: 'pug',
@@ -16,6 +17,7 @@ async function seed() {
     }),
 
     User.create({
+      id: 2,
       email: 'richestman@email.com',
       firstName: 'richie',
       lastName: 'rich',
@@ -23,10 +25,19 @@ async function seed() {
     }),
 
     User.create({
+      id: 3,
       email: 'poorestman@email.com',
       firstName: 'notrichie',
       lastName: 'notrich',
       password: 'ABc123!@#'
+    }),
+
+    User.create({
+      id: 4,
+      email: 'middleman@email.com',
+      firstName: 'middle',
+      lastName: 'class',
+      password: 'Abc123!@#'
     })
   ])
 
@@ -34,25 +45,57 @@ async function seed() {
     Stocks.create({
       symbol: 'tsla',
       companyName: 'Tesla',
-      totalShares: 500
+      totalShares: 500,
+      userId: 2
     }),
 
     Stocks.create({
       symbol: 'amz',
       companyName: 'Amazon',
-      totalShares: 1000
+      totalShares: 1000,
+      userId: 2
     }),
 
     Stocks.create({
       symbol: 'msft',
       companyName: 'Microsoft',
-      totalShares: 250
+      totalShares: 250,
+      userId: 1
     }),
 
     Stocks.create({
       symbol: 'awk',
       companyName: 'Awkward',
-      totalShares: 10
+      totalShares: 10,
+      userId: 1
+    }),
+
+    Stocks.create({
+      symbol: 'goog',
+      companyName: 'Alphabet',
+      totalShares: 100,
+      userId: 2
+    }),
+
+    Stocks.create({
+      symbol: 'WTM',
+      companyName: 'White Mountains Insurance Group',
+      totalShares: 5,
+      userId: 2
+    }),
+
+    Stocks.create({
+      symbol: 'BRK.A',
+      companyName: 'Berkshire Hathaway',
+      totalShares: 1,
+      userId: 2
+    }),
+
+    Stocks.create({
+      symbol: 'ANGI',
+      companyName: 'Angi Homeservices',
+      totalShares: 5,
+      userId: 4
     })
   ])
 

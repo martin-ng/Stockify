@@ -4,7 +4,7 @@ const Transactions = db.model('transactions')
 const User = db.model('user')
 // const Stocks = db.model('stocks')
 
-describe('Transactions model', () => {
+xdescribe('Transactions model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
