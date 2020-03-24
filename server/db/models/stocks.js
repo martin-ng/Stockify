@@ -23,6 +23,15 @@ Stocks.beforeCreate(stock => {
   stock.symbol = stock.symbol.toUpperCase()
 })
 
+Stocks.getPortfolio = async function(userId) {
+  const stocks = await Stocks.findAll({
+    where: {
+      userId
+    }
+  })
+  return stocks
+}
+
 // Stocks.updateTotal = async function(transaction) {
 //   const stocks =
 // }
