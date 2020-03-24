@@ -2,24 +2,50 @@ const {expect} = require('chai')
 const db = require('../../server/db/index')
 const Transactions = db.model('transactions')
 const User = db.model('user')
-const Stocks = db.model('stocks')
+// const Stocks = db.model('stocks')
 
-xdescribe('Transactions model', () => {
+describe('Transactions model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('column definitions', () => {
-    let transactionOne
-    let transactionTwo
-    let transactionThree
+    let transactionOne, transactionTwo, transactionThree
+    let user1, user2, user3
 
     beforeEach(async () => {
+      user1 = await User.create({
+        id: 1,
+        email: 'cody@email.com',
+        firstName: 'cody',
+        lastName: 'pug',
+        password: 'Abc123!@',
+        cashBalance: 10000
+      })
+
+      user2 = await User.create({
+        id: 2,
+        email: 'richestman@email.com',
+        firstName: 'richie',
+        lastName: 'rich',
+        password: 'abcsD123!@#',
+        cashBalance: 3000
+      })
+
+      user3 = await User.create({
+        id: 3,
+        email: 'poorestman@email.com',
+        firstName: 'notrichie',
+        lastName: 'notrich',
+        password: 'ABc123!@#'
+      })
+
       transactionOne = await Transactions.create({
         action: 'BUY',
         symbol: 'tsla',
         priceAtPurchase: 300,
-        totalShares: 5
+        totalShares: 5,
+        userId: 1
       })
 
       transactionTwo = await Transactions.create({
@@ -27,7 +53,8 @@ xdescribe('Transactions model', () => {
         action: 'BUY',
         symbol: 'tsla',
         priceAtPurchase: 200,
-        totalShares: 20
+        totalShares: 20,
+        userId: 1
       })
 
       transactionThree = await Transactions.create({
@@ -35,7 +62,8 @@ xdescribe('Transactions model', () => {
         action: 'SELL',
         symbol: 'amz',
         priceAtPurchase: 50,
-        totalShares: 5
+        totalShares: 5,
+        userId: 2
       })
     })
 
@@ -97,6 +125,20 @@ xdescribe('Transactions model', () => {
         const total = transactionThree.dataValues.totalShares
         expect(purchasePrice * total).to.be.equal(250)
       })
-    })
+    }) // end of transactions total price tests
+
+    describe('get all transactions for a user', () => {
+      it('All of user one`s transactions', async () => {
+        const id = user1.dataValues.id
+        let transactions = await Transactions.getAllTransactions(id)
+        expect(transactions.length).to.be.equal(2)
+      })
+
+      it('All of user two`s transactions', async () => {
+        const id = user2.dataValues.id
+        let transactions = await Transactions.getAllTransactions(id)
+        expect(transactions.length).to.be.equal(1)
+      })
+    }) // end of transactions tests
   })
 }) // end of column definition tests

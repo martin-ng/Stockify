@@ -37,8 +37,18 @@ const Transactions = db.define('transactions', {
   }
 })
 
-module.exports = Transactions
-
 Transactions.beforeCreate(transaction => {
   transaction.symbol = transaction.symbol.toUpperCase()
 })
+
+Transactions.getAllTransactions = async function(userId) {
+  let transactions = await Transactions.findAll({
+    where: {
+      userId
+    }
+  })
+  let allTransactions = transactions.map(stock => stock.dataValues)
+  return allTransactions
+}
+
+module.exports = Transactions
