@@ -3,7 +3,7 @@ const db = require('../../server/db/index')
 const Stocks = db.model('stocks')
 const User = db.model('user')
 
-describe('Stocks', () => {
+xdescribe('Stocks', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })

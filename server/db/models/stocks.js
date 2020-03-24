@@ -25,15 +25,16 @@ Stocks.beforeCreate(stock => {
     stock.companyName[0].toUpperCase() + stock.companyName.slice(1)
 })
 
-Stocks.getPortfolio = async function(userId) {
-  const stocks = await Stocks.findAll({
-    where: {
-      userId
-    }
-  })
-  let portfolio = stocks.map(stock => stock.dataValues)
-  return portfolio
-}
+// Stocks.getPortfolio = function(userId) {
+//   const stocks = Stocks.findAll({
+//     where: {
+//       userId
+//     }
+//   })
+//   console.log("inside : ", stocks)
+//   let portfolio = stocks.map(stock => stock.dataValues)
+//   return portfolio
+// }
 
 // Stocks.updateTotal = async function(transaction) {
 //   const stocks =
