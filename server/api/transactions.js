@@ -6,14 +6,14 @@ module.exports = router
 // get user's transaction history
 router.get('/', async (req, res, next) => {
   try {
-    console.log('req.user: ', req.user)
-    const transactions = Transactions.findAll({
+    const transactions = await Transactions.findAll({
       where: {
         userId: req.user.id
       }
     })
+
     if (!transactions) res.sendStatus(400)
-    res.json(transactions)
+    else res.json(transactions)
   } catch (error) {
     next(error)
   }
