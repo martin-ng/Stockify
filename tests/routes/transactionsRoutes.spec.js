@@ -57,7 +57,7 @@ describe('Transaction Routes', () => {
       transactionTwo = await Transactions.create(transTwoObj)
     })
 
-    describe('GET `/api/transactions/` route', () => {
+    xdescribe('GET `/api/transactions/` route', () => {
       it('responds with a login success and a transaction history', async () => {
         await agent.post('/auth/login').send(userTwoObj)
         const response = await agent.get('/api/transactions')
@@ -65,5 +65,39 @@ describe('Transaction Routes', () => {
         expect(response.body[0].userId).to.be.equal(2)
       })
     }) // end of get transaction tests
+
+    describe('POST `/api/transactions/create` route', () => {
+      let newObj = {
+        datePurchased: '2020-01-02',
+        action: 'BUY',
+        symbol: 'AMZ',
+        priceAtPurchase: 100,
+        totalShares: 2,
+        userId: 1
+      }
+
+      let newObjTwo = {
+        action: 'SELL',
+        symbol: 'TSLA',
+        priceAtPurchase: 150,
+        totalShares: 20,
+        userId: 1
+      }
+
+      xit('returns error 503 if user is not logged in', async () => {
+        await agent
+          .post('/api/transactions/create')
+          .send(newObj)
+          .expect(503)
+      })
+
+      it('creates a new transaction for user one`s history', async () => {
+        await agent.post('/auth/login').send(userOneObj)
+        await agent.post('/api/transactions/create').send(newObjTwo)
+        const response = await agent.get('/api/transactions/')
+        expect(response.body.length).to.be.equal(1)
+        expect(response.body[0].userId).to.be.equal(1)
+      })
+    })
   })
 })

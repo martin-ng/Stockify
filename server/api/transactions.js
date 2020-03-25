@@ -4,7 +4,7 @@ const {checkUser} = require('../utils')
 module.exports = router
 
 // get user's transaction history
-router.get('/', async (req, res, next) => {
+router.get('/', checkUser, async (req, res, next) => {
   try {
     const transactions = await Transactions.findAll({
       where: {
@@ -27,9 +27,12 @@ router.post('/create', checkUser, async (req, res, next) => {
       action: req.body.action,
       symbol: req.body.symbol,
       priceAtPurchase: req.body.priceAtPurchase,
-      totalShares: req.body.totalShares
+      totalShares: req.body.totalShares,
+      userId: req.user.id
     })
-    res.json(transaction).status(200)
+
+    if (!transaction) res.sendStatus(400)
+    else res.json(transaction)
   } catch (error) {
     next(error)
   }
