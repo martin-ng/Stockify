@@ -9,7 +9,7 @@ const supertest = require('supertest')
 // to make authenticated tests persist
 const agent = supertest.agent(app)
 
-describe('Transaction Routes', () => {
+xdescribe('Transaction Routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -57,7 +57,7 @@ describe('Transaction Routes', () => {
       transactionTwo = await Transactions.create(transTwoObj)
     })
 
-    xdescribe('GET `/api/transactions/` route', () => {
+    describe('GET `/api/transactions/` route', () => {
       it('responds with a login success and a transaction history', async () => {
         await agent.post('/auth/login').send(userTwoObj)
         const response = await agent.get('/api/transactions')
@@ -84,7 +84,7 @@ describe('Transaction Routes', () => {
         userId: 1
       }
 
-      xit('returns error 503 if user is not logged in', async () => {
+      it('returns error 503 if user is not logged in', async () => {
         await agent
           .post('/api/transactions/create')
           .send(newObj)
