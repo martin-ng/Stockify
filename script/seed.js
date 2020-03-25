@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Stocks} = require('../server/db/models')
+const {User, Stocks, Transactions} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -107,8 +107,51 @@ async function seed() {
     })
   ])
 
+  const transactions = await Promise.all([
+    Transactions.create({
+      action: 'BUY',
+      symbol: 'TSLA',
+      priceAtPurchase: 400,
+      totalShares: 10,
+      userId: 1
+    }),
+
+    Transactions.create({
+      action: 'BUY',
+      symbol: 'TSLA',
+      priceAtPurchase: 100,
+      totalShares: 10,
+      userId: 1
+    }),
+
+    Transactions.create({
+      action: 'BUY',
+      symbol: 'TSLA',
+      priceAtPurchase: 250,
+      totalShares: 10,
+      userId: 1
+    }),
+
+    Transactions.create({
+      action: 'BUY',
+      symbol: 'TSLA',
+      priceAtPurchase: 300,
+      totalShares: 50,
+      userId: 1
+    }),
+
+    Transactions.create({
+      action: 'SELL',
+      symbol: 'TSLA',
+      priceAtPurchase: 200,
+      totalShares: 10,
+      userId: 1
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${stocks.length} stocks`)
+  console.log(`seeded ${transactions.length} transactions`)
   console.log(`seeded successfully`)
 }
 

@@ -1,41 +1,45 @@
 const {expect} = require('chai')
 const db = require('../../server/db/index')
-const Stocks = db.model('stocks')
 const User = db.model('user')
+const Transactions = db.model('transactions')
 
 const app = require('../../server/index')
-const supertest = require('supertest')
 const agent = require('supertest')(app)
 
-const seed = require('../../script/seed')
-
-xdescribe('Transactions Routes', () => {
+describe('Transaction Routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
-  // run seed file
-  describe('seed script in user routes', () => {
-    it('seeds successfully', seed)
-  })
+  describe('/transaction route', () => {
+    let userOneObj = {
+      email: 'cody@email.com',
+      firstName: 'cody',
+      lastName: 'pug',
+      password: 'Abc123!@',
+      cashBalance: 10000
+    }
 
-  describe('Logged in user', () => {
-    let user
-    beforeEach(() => {
-      user = {
-        email: 'testuser@email.com'
-      }
-      req.login(user, err => (err ? next(err) : res.json(user)))
-    })
-  })
+    let userTwoObj = {
+      email: 'richestman@email.com',
+      firstName: 'Richie',
+      lastName: 'Rich',
+      password: 'abcsD123!@#',
+      cashBalance: 30000
+    }
 
-  describe('GET `/api/portfolio` route', () => {
-    it('gets all the stocks the user owns', async () => {
-      console.log('testing this test')
-      //   console.log("req.user", req.user)
-      // const response = await agent.get('/users/2/portfolio').expect(200)
-      // console.log("response: ", response)
-      // expect(response).to.equal('promise resolved')
+    let user1, user2
+
+    beforeEach(async () => {
+      user1 = await User.create(userOneObj)
     })
+
+    describe('GET `/api/transactions/` route', () => {
+      it('responds with a login success and a transaction history', async () => {
+        const response = await agent.post('/auth/login').send(userOneObj)
+        console.log('response: ', response)
+        await agent.get('/api/transactions').expect(200)
+      })
+    }) // end of get transaction tests
   })
 })

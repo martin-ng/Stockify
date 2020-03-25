@@ -4,7 +4,6 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    console.log('in login')
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
       res.status(401).send('Wrong username and/or password')
@@ -13,6 +12,7 @@ router.post('/login', async (req, res, next) => {
       res.status(401).send('Wrong username and/or password')
     } else {
       req.login(user, err => (err ? next(err) : res.json(user)))
+      // console.log("TESTING!!", req.user)
     }
   } catch (err) {
     next(err)
@@ -39,7 +39,6 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  console.log('req user: ', req.user)
   res.json(req.user)
 })
 

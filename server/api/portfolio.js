@@ -3,7 +3,8 @@ const {User, Stocks, Transactions} = require('../db/models')
 const {checkUser} = require('../utils')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+// get user's portfolio
+router.get('/portfolio', checkUser, async (req, res, next) => {
   try {
     const stocks = await Stocks.findAll({
       where: {
@@ -16,3 +17,5 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/')
