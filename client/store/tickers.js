@@ -26,7 +26,6 @@ const gotTickers = tickers => ({type: GOT_TICKERS, tickers})
 export const getTickersThunk = ticker => async dispatch => {
   try {
     const {data} = await axios.get(`/api/tickers/${ticker}`)
-    console.log('redux ticker: ', data)
     dispatch(gotTickers(data.quote))
   } catch (error) {
     console.log(error)

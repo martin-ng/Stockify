@@ -7,8 +7,10 @@ import Axios from 'axios'
 const TradeBox = props => {
   const [quantity, setQuantity] = useState('')
   const [ticker, setTicker] = useState(1)
+  const [amount, setAmount] = useState(0)
+  const [errorMsg, setError] = useState('')
 
-  const {user, getTicker} = props
+  const {user, getTicker, symbols} = props
 
   return (
     <div id="trade-container">
@@ -24,25 +26,28 @@ const TradeBox = props => {
             name="symbol"
             onChange={event => {
               if (event.target.value !== '') {
-                console.log('event: ', event.target.value)
                 getTicker(event.target.value)
               }
               setTicker(event.target.value)
             }}
           />
-
-          {/* <input type='submit' value='search' /> */}
+          <input
+            className="trade-box-container"
+            type="text"
+            placeholder="Amount"
+            name="symbol quantity"
+            value={amount}
+            onChange={event => {
+              const regex = /^\d+$/
+              if (event.target.value === '' || regex.test(event.target.value)) {
+                setAmount(event.target.value)
+              } else {
+                setError('Please input a number!')
+              }
+            }}
+          />
+          <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div>
         </div>
-
-        {/* {transactions.length ? (
-        transactions.map(transaction => {
-          return (
-            <TransactionsList key={transaction.id} transaction={transaction} />
-          )
-        })
-      ) : (
-        <h3>YOU DO NOT HAVE A TRANSACTION'S HISTORY</h3>
-      )} */}
       </div>
     </div>
   )
