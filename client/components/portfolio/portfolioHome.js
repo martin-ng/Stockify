@@ -19,16 +19,7 @@ const PortfolioHome = props => {
     async function fetchData() {
       await props.getPortfolio()
     }
-    // const portfolioValue = portfolio => {
-    //   let total = portfolio.reduce((acc, current) => {
-    //     let shares = current.totalShares
-    //     let price = current.latestPrice
-    //     return acc + (+((shares * price).toFixed(2)))
-    //   }, 0)
-    //   // portfolio.forEach(el => console.log("el: ", el))
-    //   console.log("TOTAL VALUE: ", total)
-    //   setTotalValue(total)
-    // }
+
     return () => clearInterval(interval)
   }, [])
 

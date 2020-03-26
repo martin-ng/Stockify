@@ -11,23 +11,23 @@ const GOT_TICKERS = 'GET_TICKERS'
  * INITIAL STATE
  */
 const defaultTickers = {
-  tickers: []
+  tickersInfo: {}
 }
 
 /**
  * ACTION CREATORS
  */
-const gotTickers = symbols => ({type: GOT_TICKERS, tickers})
+const gotTickers = tickers => ({type: GOT_TICKERS, tickers})
 
 /**
  * THUNK CREATORS
  */
 
-export const getTickersThunk = () => async dispatch => {
+export const getTickersThunk = ticker => async dispatch => {
   try {
-    const {data} = await axios.get('/api/tickers')
+    const {data} = await axios.get(`/api/tickers/${ticker}`)
     console.log('redux ticker: ', data)
-    dispatch(gotTickers(data))
+    dispatch(gotTickers(data.quote))
   } catch (error) {
     console.log(error)
   }
@@ -41,7 +41,7 @@ export default function(state = defaultTickers, action) {
   switch (action.type) {
     case GOT_TICKERS:
       return {
-        tickers: [...action.tickers]
+        tickers: {...action.tickers}
       }
 
     default:

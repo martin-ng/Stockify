@@ -1,52 +1,14 @@
-import React, {useState, useEffect, useAsyncHook} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {me, getTickersThunk} from '../../store'
 import config from '../../../config'
 import Axios from 'axios'
 
 const TradeBox = props => {
-  const [tickers, setTickers] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState('')
-  const [count, setCount] = useState(0)
-  const handleChange = e => {
-    setSearchTerm(e.target.value)
-  }
+  const [quantity, setQuantity] = useState('')
+  const [ticker, setTicker] = useState(1)
 
-  useEffect(() => {
-    fetchData()
-
-    const interval = setInterval(() => {
-      console.log('getting tickers')
-      fetchData()
-    }, 600000)
-
-    async function fetchData() {
-      const response = await Axios.get(
-        'https://sandbox.iexapis.com//beta/ref-data/symbols?token=' +
-          config.IEX_TEST_API_KEY
-      )
-      setTickers(response.data)
-    }
-
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(
-    () => {
-      const results = tickers.filter(element => {
-        let current = element.symbol
-        console.log('current: ', current)
-        return current.toLowerCase().includes(searchTerm)
-      })
-      setSearchResults(results)
-    },
-    [searchTerm]
-  )
-
-  // tickers.forEach(element => console.log("element: ", element))
-  console.log('search results: ', searchResults)
-  const {user} = props
+  const {user, getTicker} = props
 
   return (
     <div id="trade-container">
@@ -56,10 +18,17 @@ const TradeBox = props => {
         </div>
         <div>
           <input
+            className="trade-box-container"
             type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={handleChange}
+            placeholder="Search Company Ticker"
+            name="symbol"
+            onChange={event => {
+              if (event.target.value !== '') {
+                console.log('event: ', event.target.value)
+                getTicker(event.target.value)
+              }
+              setTicker(event.target.value)
+            }}
           />
 
           {/* <input type='submit' value='search' /> */}
@@ -92,7 +61,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getTicker: () => dispatch(getTickersThunk())
+    getTicker: ticker => dispatch(getTickersThunk(ticker))
   }
 }
 
