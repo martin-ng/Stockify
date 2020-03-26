@@ -55,12 +55,12 @@ export default function(state = defaultPortfolio, action) {
         stocks: [...action.portfolio],
         totalValue: state.totalValue
       }
-    case GOT_VALUE:
-      return {
-        stocks: stocks,
-        totalValue: state.totalValue,
-        test: [...action.portfolio]
-      }
+    // case GOT_VALUE:
+    //   return {
+    //     stocks: stocks,
+    //     totalValue: state.totalValue,
+    //     test: [...action.portfolio]
+    //   }
     default:
       return state
   }

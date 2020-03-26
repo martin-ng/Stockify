@@ -35,9 +35,13 @@ const PortfolioHome = props => {
       <div>
         <h2>Your Balance: </h2>
       </div>
-      {portfolio.map(stock => {
-        return <PortfolioList key={stock.id} stock={stock} />
-      })}
+      {portfolio.length ? (
+        portfolio.map(stock => {
+          return <PortfolioList key={stock.id} stock={stock} />
+        })
+      ) : (
+        <h3>YOU DO NOT OWN STOCKS</h3>
+      )}
     </div>
   )
 }
