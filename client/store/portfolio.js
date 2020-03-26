@@ -48,19 +48,12 @@ export const getPortfolioThunk = () => async dispatch => {
  * REDUCER
  */
 export default function(state = defaultPortfolio, action) {
-  console.log('action portfolio; ', action.portfolio)
   switch (action.type) {
     case GOT_PORTFOLIO:
       return {
         stocks: [...action.portfolio],
         totalValue: state.totalValue
       }
-    // case GOT_VALUE:
-    //   return {
-    //     stocks: stocks,
-    //     totalValue: state.totalValue,
-    //     test: [...action.portfolio]
-    //   }
     default:
       return state
   }

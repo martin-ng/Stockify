@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {getPortfolioThunk} from '../../store'
 
 const PortfolioList = props => {
   const {
@@ -19,7 +18,6 @@ const PortfolioList = props => {
     return value > 0 ? 'green' : 'red'
   }
 
-  console.log('PORTFOLIO LIST: ', props)
   return (
     <div>
       <div>
@@ -34,17 +32,4 @@ const PortfolioList = props => {
   )
 }
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {}
-}
-
-export default connect(mapState, mapDispatch)(PortfolioList)
+export default PortfolioList

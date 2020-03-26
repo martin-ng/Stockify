@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const axios = require('axios')
-const {User, Stocks, Transactions} = require('../db/models')
+const {Stocks} = require('../db/models')
 const {checkUser} = require('../utils')
 module.exports = router
 
@@ -54,12 +54,3 @@ router.get('/update', checkUser, async (req, res, next) => {
     next(error)
   }
 })
-
-// get user's portfolio value
-// router.get('/currentvalue', async (req, res, next) => {
-//   try {
-//     console.log('API KEY', process.env.IEX_TEST_API_KEY)
-//   } catch (error) {
-//     next(error)
-//   }
-// })

@@ -16,3 +16,4 @@ export default store
 export * from './user'
 export * from './portfolio'
 export * from './transactions'
+export * from './tickers'
