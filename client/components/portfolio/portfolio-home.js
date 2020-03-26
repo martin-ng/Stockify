@@ -1,20 +1,31 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {getPortfolioThunk} from '../../store'
+import {
+  getPortfolioThunk,
+  updatePortfolioValue,
+  getPortfolioValueThunk
+} from '../../store'
 import PortfolioList from './portfolio-list'
+import Axios from 'axios'
 
 const PortfolioHome = props => {
   useEffect(() => {
-    fetchData()
-    async function fetchData() {
+    loadInitialData()
+
+    const interval = setInterval(() => {
+      console.log('getting portfolio')
+      props.getPortfolio()
+    }, 5000)
+
+    async function loadInitialData() {
       await props.getPortfolio()
     }
+    return () => clearInterval(interval)
   }, [])
 
-  const {stocks} = props
-  console.log('stocks props: ', props)
-  console.log('stocks: ', stocks)
+  const {portfolio} = props
+  console.log('props: ', props.portfolio)
 
   return (
     <div>
@@ -24,8 +35,8 @@ const PortfolioHome = props => {
       <div>
         <h2>Your Balance: </h2>
       </div>
-      {stocks.map((stock, index) => {
-        return <PortfolioList key={index} stock={stock} />
+      {portfolio.map(stock => {
+        return <PortfolioList key={stock.id} stock={stock} />
       })}
     </div>
   )
@@ -36,14 +47,18 @@ const PortfolioHome = props => {
  */
 const mapState = state => {
   return {
-    stocks: state.portfolio.stocks,
+    portfolio: state.portfolio.stocks,
+    // totalValue: state.portfolio.totalValue,
+    test: state.portfolio.test,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getPortfolio: () => dispatch(getPortfolioThunk())
+    getPortfolio: () => dispatch(getPortfolioThunk()),
+    updateValues: () => dispatch(updatePortfolioValue())
+    // getPortfolioValue: portfolio => dispatch(getPortfolioValueThunk(portfolio))
   }
 }
 

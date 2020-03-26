@@ -4,20 +4,24 @@ import {connect} from 'react-redux'
 import {getPortfolioThunk} from '../../store'
 
 const PortfolioList = props => {
-  //   useEffect(() => {
-  //     fetchData()
-  //     async function fetchData() {
-  //       await props.getPortfolio()
-  //     }
-  //   }, [])
+  const {
+    symbol,
+    openingPrice,
+    companyName,
+    totalShares,
+    latestPrice
+  } = props.stock
 
+  console.log('PORTFOLIO LIST: ', props)
   return (
     <div>
       <div>
-        <h1>Symbol {props.symbol}</h1>
+        <h2>{symbol}</h2>
+        <h3>{companyName}</h3>
       </div>
       <div>
-        <h2>Shares {props.totalShares} </h2>
+        <p>Current price: {latestPrice}</p>
+        <p>Total shares: {totalShares}</p>
       </div>
     </div>
   )
@@ -28,15 +32,12 @@ const PortfolioList = props => {
  */
 const mapState = state => {
   return {
-    stocks: state.portfolio.stocks,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
-  return {
-    getPortfolio: () => dispatch(getPortfolioThunk())
-  }
+  return {}
 }
 
 export default connect(mapState, mapDispatch)(PortfolioList)

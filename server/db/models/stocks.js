@@ -12,6 +12,12 @@ const Stocks = db.define('stocks', {
     allowNull: false
   },
 
+  openingPrice: {
+    type: Sequelize.DECIMAL(12, 2),
+    allowNull: false,
+    min: 0
+  },
+
   totalShares: {
     type: Sequelize.INTEGER,
     allowNull: false,

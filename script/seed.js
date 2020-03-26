@@ -54,56 +54,64 @@ async function seed() {
       symbol: 'tsla',
       companyName: 'Tesla',
       totalShares: 500,
-      userId: 2
+      userId: 2,
+      openingPrice: 503
     }),
 
     Stocks.create({
       symbol: 'amz',
       companyName: 'Amazon',
       totalShares: 1000,
-      userId: 2
+      userId: 2,
+      openingPrice: 200
     }),
 
     Stocks.create({
       symbol: 'msft',
       companyName: 'Microsoft',
       totalShares: 250,
-      userId: 1
+      userId: 1,
+      openingPrice: 300
     }),
 
     Stocks.create({
       symbol: 'awk',
-      companyName: 'Awkward',
+      companyName: 'American Water wORKS',
       totalShares: 10,
-      userId: 1
+      userId: 1,
+      openingPrice: 450
     }),
 
     Stocks.create({
       symbol: 'goog',
       companyName: 'Alphabet',
       totalShares: 100,
-      userId: 2
+      userId: 2,
+      openingPrice: 1200
     }),
 
     Stocks.create({
       symbol: 'WTM',
       companyName: 'White Mountains Insurance Group',
       totalShares: 5,
-      userId: 2
+      userId: 2,
+      openingPrice: 1300
     }),
 
     Stocks.create({
       symbol: 'BRK.A',
       companyName: 'Berkshire Hathaway',
       totalShares: 1,
-      userId: 2
+      userId: 2,
+      openingPrice: 1100
     }),
 
     Stocks.create({
       symbol: 'ANGI',
       companyName: 'Angi Homeservices',
       totalShares: 5,
-      userId: 4
+      userId: 4,
+      openingPrice: 10
     })
   ])
 
