@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
-import {} from '../../store'
+// import {} from '../../store'
+// import './trade.css'
 
 const TradeBox = props => {
-  const [companySymbol, setSymbol] = useState('')
-
   return (
-    <div>
-      <h1>Cash</h1>
+    <div id="trade-container">
+      <h1>BUY/SELL STOCKS</h1>
     </div>
   )
 }

@@ -19,3 +19,30 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#routes-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#trade-container {
+  width: 40%;
+  min-width: 200px;
+  margin: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 50%;
+  background-color: #ffffffdd;
+  padding: 30px;
+}
+
+#portfolio-container {
+  width: 40%;
+  min-width: 200px;
+  margin: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 50%;
+  background-color: #ffffffdd;
+  padding: 30px;
+}

@@ -28,7 +28,7 @@ const PortfolioHome = props => {
   console.log('props: ', props.portfolio)
 
   return (
-    <div>
+    <div id="portfolio-container">
       <div>
         <h1>Your Portfolio</h1>
       </div>

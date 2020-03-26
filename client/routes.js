@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Router} from 'react-router-dom'
 import history from './history'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, PortfolioHome} from './components'
+import {Login, Signup, UserHome, PortfolioHome, TradeBox} from './components'
 
 import {me} from './store'
 
@@ -21,7 +21,7 @@ const Routes = props => {
   const {isLoggedIn} = props
 
   return (
-    <div>
+    <div id="routes-container">
       {/* Routes placed here are available to all visitors */}
       {!isLoggedIn && (
         <Switch>
@@ -41,7 +41,7 @@ const Routes = props => {
             <Route component={PortfolioHome} />
           </Switch>
 
-          <Route component={Login} />
+          <Route component={TradeBox} />
         </Router>
       )}
     </div>
