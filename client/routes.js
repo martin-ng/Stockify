@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Router} from 'react-router-dom'
+import history from './history'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, PortfolioHome} from './components'
-// import {PortfolioHome} from './components/portfolio'
 
 import {me} from './store'
 
@@ -12,7 +12,6 @@ import {me} from './store'
  */
 
 const Routes = props => {
-  // console.log("props before: ", props)
   useEffect(
     () => {
       props.loadInitialData()
@@ -20,23 +19,32 @@ const Routes = props => {
     [props.isloggedIn]
   )
   const {isLoggedIn} = props
-  // console.log("props after", props)
 
   return (
-    <Switch>
+    <div>
       {/* Routes placed here are available to all visitors */}
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      {isLoggedIn && (
+      {!isLoggedIn && (
         <Switch>
-          {/* Routes placed here are only available after logging in */}
-          <Route path="/home" component={UserHome} />
-          <Route component={PortfolioHome} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route component={Login} />
         </Switch>
       )}
-      {/* Displays our Login component as a fallback */}
-      <Route component={Login} />
-    </Switch>
+
+      {isLoggedIn && (
+        <Router history={history}>
+          {/* Routes placed here are only available after logging in */}
+
+          <Switch>
+            <Route path="/home" component={UserHome} />
+            <Route path="/portfolio" component={PortfolioHome} />
+            <Route component={PortfolioHome} />
+          </Switch>
+
+          <Route component={Login} />
+        </Router>
+      )}
+    </div>
   )
 }
 
@@ -53,9 +61,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    loadInitialData: () => dispatch(me())
+    // loadInitialData() {
+    //   dispatch(me())
+    // }
   }
 }
 
