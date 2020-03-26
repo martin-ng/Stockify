@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {me, getTickersThunk} from '../../store'
-import config from '../../../config'
-import Axios from 'axios'
 
-const TradeBox = props => {
+const TradeDetails = props => {
   const [quantity, setQuantity] = useState('')
   const [ticker, setTicker] = useState(1)
   const [amount, setAmount] = useState(0)
@@ -31,6 +29,7 @@ const TradeBox = props => {
               setTicker(event.target.value)
             }}
           />
+          <TradeDetails props={symbols} />
           <input
             className="trade-box-container"
             type="text"
@@ -70,4 +69,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(TradeBox)
+export default connect(mapState, mapDispatch)(TradeDetails)

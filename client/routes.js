@@ -9,7 +9,7 @@ import {
   UserHome,
   PortfolioHome,
   TransactionsHome,
-  TradeBox
+  TradeHome
 } from './components'
 
 import {me} from './store'
@@ -49,7 +49,7 @@ const Routes = props => {
             <Route component={PortfolioHome} />
           </Switch>
 
-          <Route component={TradeBox} />
+          <Route component={TradeHome} />
         </Router>
       )}
     </div>
