@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {
-  getPortfolioThunk,
-  updatePortfolioValue,
-  getPortfolioValueThunk
-} from '../../store'
-import PortfolioList from './portfolio-list'
-import Axios from 'axios'
+import {getPortfolioThunk, updatePortfolioValue} from '../../store'
+import PortfolioList from './portfolioList'
 
 const PortfolioHome = props => {
   useEffect(() => {
@@ -32,9 +27,7 @@ const PortfolioHome = props => {
       <div>
         <h1>Your Portfolio</h1>
       </div>
-      <div>
-        <h2>Your Balance: </h2>
-      </div>
+
       {portfolio.length ? (
         portfolio.map(stock => {
           return <PortfolioList key={stock.id} stock={stock} />
@@ -52,8 +45,6 @@ const PortfolioHome = props => {
 const mapState = state => {
   return {
     portfolio: state.portfolio.stocks,
-    // totalValue: state.portfolio.totalValue,
-    test: state.portfolio.test,
     isLoggedIn: !!state.user.id
   }
 }
@@ -62,7 +53,6 @@ const mapDispatch = dispatch => {
   return {
     getPortfolio: () => dispatch(getPortfolioThunk()),
     updateValues: () => dispatch(updatePortfolioValue())
-    // getPortfolioValue: portfolio => dispatch(getPortfolioValueThunk(portfolio))
   }
 }
 

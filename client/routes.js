@@ -3,7 +3,14 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Router} from 'react-router-dom'
 import history from './history'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, PortfolioHome, TradeBox} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  PortfolioHome,
+  TransactionsHome,
+  TradeBox
+} from './components'
 
 import {me} from './store'
 
@@ -38,6 +45,7 @@ const Routes = props => {
           <Switch>
             <Route path="/home" component={UserHome} />
             <Route path="/portfolio" component={PortfolioHome} />
+            <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />
           </Switch>
 
