@@ -6,11 +6,6 @@ import PortfolioList from './portfolioList'
 
 const PortfolioHome = props => {
   const [totalValue, setTotalValue] = useState(0)
-  const [data, setData] = useState([])
-
-  const testing = () => {
-    console.log('testing: ')
-  }
 
   useEffect(() => {
     fetchData()
@@ -23,7 +18,6 @@ const PortfolioHome = props => {
 
     async function fetchData() {
       await props.getPortfolio()
-      setData(props.portfolio)
     }
     // const portfolioValue = portfolio => {
     //   let total = portfolio.reduce((acc, current) => {
@@ -38,16 +32,11 @@ const PortfolioHome = props => {
     return () => clearInterval(interval)
   }, [])
 
-  useEffect(
-    () => {
-      if (props.portfolio.length) {
-        portfolioValue(props.portfolio)
-      }
-    },
-    [totalValue]
-  )
-
-  console.log(totalValue)
+  // useEffect(() => {
+  //   if (props.portfolio.length) {
+  //     portfolioValue(props.portfolio)
+  //   }
+  // }, [totalValue])
 
   // const portfolioValue = portfolio => {
   //   let total = portfolio.reduce((acc, current) => {

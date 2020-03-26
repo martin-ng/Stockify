@@ -26,7 +26,6 @@ const gotTransactions = transactions => ({type: GOT_TRANSACTIONS, transactions})
 export const getTransactionsThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/transactions')
-    console.log('TRANSACTIONS DATA: ', data)
     dispatch(gotTransactions(data))
   } catch (error) {
     console.log(error)
