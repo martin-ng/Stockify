@@ -34,7 +34,7 @@ router.get('/', checkUser, async (req, res, next) => {
   }
 })
 
-router.put('/increase', checkUser, async (req, res, next) => {
+router.put('/buy', checkUser, async (req, res, next) => {
   try {
     const {ticker, quantity, companyName, open} = req.body
 
@@ -61,6 +61,44 @@ router.put('/increase', checkUser, async (req, res, next) => {
       })
       res.json(newStock)
     }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/sell', checkUser, async (req, res, next) => {
+  try {
+    let sharesOwned = req.body.details.sharesOwned
+    let quantityToSell = +parseInt(req.body.details.quantityToSell, 10).toFixed(
+      2
+    )
+    let price = +parseInt(req.body.details.stockPrice, 10).toFixed(2)
+    let symbol = req.body.details.companySymbol
+
+    let totalGained = quantityToSell * price
+    const stock = await Stocks.findOne({
+      where: {
+        symbol,
+        userId: req.user.id
+      }
+    })
+
+    const user = await User.findOne({
+      where: {
+        id: req.user.id
+      }
+    })
+    user.cashBalance = +parseInt(user.cashBalance, 10).toFixed(2) + totalGained
+    user.save()
+
+    if (sharesOwned === quantityToSell) {
+      stock.destroy()
+      stock.save()
+    } else {
+      stock.totalShares = stock.totalShares - quantityToSell
+      stock.save()
+    }
+    res.sendStatus(400)
   } catch (error) {
     next(error)
   }

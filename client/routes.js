@@ -28,23 +28,19 @@ const Routes = props => {
       {!isLoggedIn && (
         <Switch>
           <Redirect exact from="/" to="/login" />
-          {/* <Redirect exact from="/home" to="/login" /> */}
+          <Redirect exact from="/home" to="/login" />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>
       )}
 
-      {/* <Route exact path="/">
-{loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-</Route> */}
       {isLoggedIn && (
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
 
           <Switch>
-            {/* <Route path="/home" component={UserHome} /> */}
             <Redirect exact from="/" to="/portfolio" />
-            {/* <Redirect exact from="/home" to="/portfolio" /> */}
+            <Redirect exact from="/home" to="/portfolio" />
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />

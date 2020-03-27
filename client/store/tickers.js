@@ -36,7 +36,6 @@ export const getTickersThunk = ticker => async dispatch => {
  * REDUCER
  */
 export default function(state = defaultTickers, action) {
-  console.log('action tickers; ', action.tickers)
   switch (action.type) {
     case GOT_TICKERS:
       return {

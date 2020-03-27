@@ -22,6 +22,7 @@ const defaultPortfolio = {
 const gotPortfolio = portfolio => ({type: GOT_PORTFOLIO, portfolio})
 // const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
 const buyUpdateValue = details => ({type: BUY_UPDATE_VALUE, details})
+const sellUpdateValue = details => ({type: SELL_UPDATE_VALUE, details})
 /**
  * THUNK CREATORS
  */
@@ -38,12 +39,20 @@ export const getPortfolioThunk = () => async dispatch => {
 export const buyUpdatePortfolio = details => async dispatch => {
   try {
     const {ticker, quantity, companyName, open} = details
-    const {data} = await axios.put('/api/portfolio/increase', {
+    const {data} = await axios.put('/api/portfolio/buy', {
       ticker,
       quantity,
       companyName,
       open
     })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const sellUpdatePortfolioThunk = details => async dispatch => {
+  try {
+    const {data} = await axios.put('/api/portfolio/sell', {details})
   } catch (error) {
     console.log(error)
   }

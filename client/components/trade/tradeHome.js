@@ -75,13 +75,10 @@ const TradeHome = props => {
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
       <input
-        type="text"
+        type="number"
         placeholder="Search Company Ticker"
         name="symbol"
         onChange={event => {
-          if (event.target.value !== '') {
-            getTicker(event.target.value)
-          }
           setTicker(event.target.value)
         }}
       />

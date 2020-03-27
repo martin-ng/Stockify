@@ -24,7 +24,6 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    console.log(res)
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
@@ -59,7 +58,6 @@ export const signup = (
 export const login = (email, password) => async dispatch => {
   let res
   try {
-    console.log('test login; ', email, password)
     res = await axios.post(`/auth/login`, {email, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))

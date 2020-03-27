@@ -134,7 +134,7 @@ form div {
 }
 
 #trade-container {
-  width: 45%;
+  width: 35%;
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -145,7 +145,7 @@ form div {
 }
 
 #transactions-container {
-  width: 60%;
+  width: 65%;
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -169,8 +169,24 @@ form div {
   justify-content: space-between;
 }
 
+.search-bar-container {
+  width: 90%;
+  height: 40px;
+  padding: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+}
+
+.portfolio-border {
+  width: 100%;
+  height: 2px;
+  background-color: #4ab1ff;
+  margin-top: 16px;
+}
+
 #portfolio-container {
-  width: 60%;
+  width: 65%;
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -178,4 +194,11 @@ form div {
   height: 50%;
   background-color: #ffffffdd;
   padding: 30px;
+}
+
+.portfolio-list-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
 }

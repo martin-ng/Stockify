@@ -12,7 +12,7 @@ const PortfolioHome = props => {
     const interval = setInterval(() => {
       console.log('getting portfolio')
       props.getPortfolio()
-    }, 5000)
+    }, 50000)
 
     async function fetchData() {
       await props.getPortfolio()
