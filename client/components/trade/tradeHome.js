@@ -30,6 +30,7 @@ const TradeHome = props => {
   useEffect(
     () => {
       getUser()
+      // setCount(count+1)
     },
     [ticker, quantity, count]
   )
@@ -40,12 +41,12 @@ const TradeHome = props => {
   }
 
   const totalCost = calculateTotal(quantity, company.latestPrice)
-
-  const changeHandler = () => {
-    setCount(0)
+  const clearState = () => {
+    setCount('')
   }
 
   const onClickHandler = action => {
+    setCount(count + 1)
     let details = {
       action,
       ticker,
@@ -57,18 +58,17 @@ const TradeHome = props => {
 
     if (quantity > 0 && user.cashBalance >= totalCost) {
       makeOrder(details)
-      changeHandler()
+      clearState()
       increasePortfolio(details)
       updatePortfolio()
       updateTransactions()
-      getUser()
     } else if (quantity <= 0) {
       console.log('please put a number higher than 0')
     } else if (user.cashBalance >= totalCost) {
       console.log('You do not have enough money!')
     }
   }
-
+  console.log('balance', props)
   return (
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
