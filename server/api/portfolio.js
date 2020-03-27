@@ -45,6 +45,7 @@ router.put('/increase', checkUser, async (req, res, next) => {
     let symbol = ticker.toUpperCase()
     let amount = +parseInt(quantity).toFixed(2)
     let openPrice = +parseInt(open).toFixed(2)
+    // let balanceOwed = amount *
 
     const stock = await Stocks.findOne({
       where: {symbol, userId: req.user.id}
@@ -64,11 +65,6 @@ router.put('/increase', checkUser, async (req, res, next) => {
       })
       res.json(newStock)
     }
-
-    let user = await User.findOne({
-      userId: req.user.id
-    })
-    console.log('user: ', user)
   } catch (error) {
     next(error)
   }
