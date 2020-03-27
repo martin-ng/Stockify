@@ -3,13 +3,17 @@ import {connect} from 'react-redux'
 import {me, getTickersThunk} from '../../store'
 
 const TradeDetails = props => {
+  // hooks storing order details
+  const [action, setAction] = useState('BUY')
+  const [symbol, setSymbol] = useState('')
+  const [priceAtPurchase, setPrice] = useState(0)
+  const [totalShares, setShares] = useState(0)
+
   const [quantity, setQuantity] = useState(0)
   const [errorMsg, setError] = useState('')
 
   const calculateTotal = (shares, price, balance) => {
     let total = +(shares * price).toFixed(2)
-    console.log('TOTAL: ', total)
-    console.log('balance: ', balance)
     return total <= balance ? total : -1
   }
 
@@ -49,6 +53,7 @@ const TradeDetails = props => {
                   )}
                 </div>
                 <button type="submit">Checkout</button>
+                <button type="submit" />
               </form>
             </div>
           ) : (

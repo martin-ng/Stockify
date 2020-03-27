@@ -5,7 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GOT_TRANSACTIONS = 'GET_TRANSACTIONS'
-// const UPDATE_VALUE = 'GOT_VALUE'
+const MAKE_TRANSACTIONS = 'MAKE_TRANSACTIONS'
 
 /**
  * INITIAL STATE
@@ -18,6 +18,10 @@ const defaultTransactions = {
  * ACTION CREATORS
  */
 const gotTransactions = transactions => ({type: GOT_TRANSACTIONS, transactions})
+const makeTransactions = orderDetails => ({
+  type: MAKE_TRANSACTIONS,
+  orderDetails
+})
 
 /**
  * THUNK CREATORS
@@ -30,6 +34,10 @@ export const getTransactionsThunk = () => async dispatch => {
   } catch (error) {
     console.log(error)
   }
+}
+
+export const makeTransactionsThunk = orderDetails => async dispatch => {
+  console.log('order details: ', orderDetails)
 }
 
 /**

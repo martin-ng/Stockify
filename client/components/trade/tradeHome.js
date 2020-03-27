@@ -1,16 +1,93 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getTickersThunk} from '../../store'
+import {getTickersThunk, makeTransactionsThunk} from '../../store'
 import TradeDetails from './tradeDetails'
 
 const TradeHome = props => {
-  const {user} = props
+  const [ticker, setTicker] = useState('')
+  const [quantity, setQuantity] = useState(0)
+  const [errorMsg, setError] = useState('')
+
+  const {user, getTicker, company, makeOrder} = props
+
+  const calculateTotal = (shares, price) => {
+    return +(shares * price).toFixed(2)
+  }
+
+  const totalCost = calculateTotal(
+    quantity,
+    company.latestPrice,
+    user.cashBalance
+  )
+
+  const onClickHandler = action => {
+    let details = {
+      action,
+      ticker,
+      quantity
+    }
+    console.log('details: ', details)
+    if (quantity > 0) {
+      makeOrder(details)
+    } else {
+      console.log('please put a number higher than 0')
+    }
+  }
 
   return (
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
-      <TradeDetails />
+      <input
+        type="text"
+        placeholder="Search Company Ticker"
+        name="symbol"
+        onChange={event => {
+          if (event.target.value !== '') {
+            getTicker(event.target.value)
+          }
+          setTicker(event.target.value)
+        }}
+      />
+      {company.symbol ? (
+        <div>
+          <h1>{company.symbol}</h1>
+          <div>
+            <h2>{company.companyName}</h2>
+            <p>Price: ${company.latestPrice}</p>
+            {totalCost > user.cashBalance ? (
+              <p>You do not have enough money!</p>
+            ) : (
+              <p>Total : ${totalCost}</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div />
+      )}
+      <input
+        type="text"
+        placeholder="Amount"
+        name="symbol quantity"
+        value={quantity}
+        onChange={event => {
+          const regex = /^\d+$/
+          if (event.target.value === '' || regex.test(event.target.value)) {
+            setQuantity(event.target.value)
+          } else {
+            setError('Please input a number!')
+          }
+        }}
+      />
+      <button type="submit" onClick={() => onClickHandler('BUY')}>
+        Checkout
+      </button>
+      {/* <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div> */}
     </div>
+
+    // <div id="trade-container">
+    //   <h1>Cash Balance: ${user.cashBalance}</h1>
+    //   <TradeDetails />
+    // </div>
   )
 }
 
@@ -19,13 +96,16 @@ const TradeHome = props => {
  */
 const mapState = state => {
   return {
-    user: state.user
+    company: state.tickers.company,
+    user: state.user,
+    isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getTicker: ticker => dispatch(getTickersThunk(ticker))
+    getTicker: ticker => dispatch(getTickersThunk(ticker)),
+    makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails))
   }
 }
 
