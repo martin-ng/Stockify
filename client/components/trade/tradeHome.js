@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {
   getTickersThunk,
   makeTransactionsThunk,
+  getPortfolioThunk,
   buyUpdatePortfolio
 } from '../../store'
 import TradeDetails from './tradeDetails'
@@ -12,7 +13,14 @@ const TradeHome = props => {
   const [quantity, setQuantity] = useState(0)
   const [errorMsg, setError] = useState('')
 
-  const {user, getTicker, company, makeOrder, increasePortfolio} = props
+  const {
+    user,
+    getTicker,
+    company,
+    makeOrder,
+    increasePortfolio,
+    updatePortfolio
+  } = props
   const {companyName, open} = props.company
 
   const calculateTotal = (shares, price) => {
@@ -39,6 +47,7 @@ const TradeHome = props => {
       console.log('pROPS USER: ', props)
       makeOrder(details)
       increasePortfolio(details)
+      updatePortfolio()
     } else {
       console.log('please put a number higher than 0')
     }
@@ -112,7 +121,8 @@ const mapDispatch = dispatch => {
     getTicker: ticker => dispatch(getTickersThunk(ticker)),
     makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails)),
     increasePortfolio: orderDetails =>
-      dispatch(buyUpdatePortfolio(orderDetails))
+      dispatch(buyUpdatePortfolio(orderDetails)),
+    updatePortfolio: () => dispatch(getPortfolioThunk())
   }
 }
 
