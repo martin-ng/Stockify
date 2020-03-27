@@ -40,11 +40,11 @@ router.get('/', checkUser, async (req, res, next) => {
 
 router.put('/increase', checkUser, async (req, res, next) => {
   try {
-    const {ticker, quantity, companyName} = req.body
-    console.log('quantity: ', quantity)
-    console.log('name: ', companyName)
+    const {ticker, quantity, companyName, open} = req.body
+
     let symbol = ticker.toUpperCase()
     let amount = +parseInt(quantity).toFixed(2)
+    let openPrice = +parseInt(open).toFixed(2)
 
     const stock = await Stocks.findOne({
       where: {symbol, userId: req.user.id}
@@ -52,10 +52,18 @@ router.put('/increase', checkUser, async (req, res, next) => {
 
     if (stock) {
       stock.totalShares += amount
-      let updatedStock = await stock.save()
+      await stock.save()
+      res.sendStatus(400)
     } else {
-      // const newStock = await Stocks.create({
-      // })
+      const newStock = await Stocks.create({
+        symbol,
+        companyName,
+        openingPrice: openPrice,
+        totalShares: amount,
+        userId: req.user.id
+      })
+      console.log('newStock: ', newStock.dataValues)
+      res.json(newStock)
     }
   } catch (error) {
     next(error)

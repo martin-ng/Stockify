@@ -13,7 +13,7 @@ const TradeHome = props => {
   const [errorMsg, setError] = useState('')
 
   const {user, getTicker, company, makeOrder, increasePortfolio} = props
-  const {companyName} = props.company
+  const {companyName, open} = props.company
 
   const calculateTotal = (shares, price) => {
     return +(shares * price).toFixed(2)
@@ -31,7 +31,8 @@ const TradeHome = props => {
       ticker,
       price: totalCost,
       quantity,
-      companyName
+      companyName,
+      open
     }
 
     if (quantity > 0) {

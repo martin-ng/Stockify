@@ -37,14 +37,13 @@ export const getPortfolioThunk = () => async dispatch => {
 
 export const buyUpdatePortfolio = details => async dispatch => {
   try {
-    console.log('update: redux', details)
-    const {ticker, quantity, companyName} = details
+    const {ticker, quantity, companyName, open} = details
     const {data} = await axios.put('/api/portfolio/increase', {
       ticker,
       quantity,
-      companyName
+      companyName,
+      open
     })
-    // console.log("data redux: ", data)
   } catch (error) {
     console.log(error)
   }
