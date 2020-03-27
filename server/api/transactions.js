@@ -48,8 +48,6 @@ router.post('/create', checkUser, async (req, res, next) => {
       userId: req.user.id
     })
 
-    // if (!transaction) res.sendStatus(400)
-    // else
     console.log('quantity: ', typeof quantity)
     console.log('latestPrice: ', typeof latestPrice)
     const balanceOwed = +parseInt(quantity).toFixed(2) * latestPrice
@@ -59,15 +57,12 @@ router.post('/create', checkUser, async (req, res, next) => {
         id: req.user.id
       }
     })
-    console.log('user before: ', user.cashBalance, user.id)
 
     let currentBalance = user.cashBalance
     let newBalance = currentBalance - balanceOwed
     user.cashBalance = newBalance
-    console.log('user after: ', user.cashBalance)
     await user.save()
     res.json(transaction)
-    // res.sendStatus(400)
   } catch (error) {
     next(error)
   }

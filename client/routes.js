@@ -6,17 +6,12 @@ import PropTypes from 'prop-types'
 import {
   Login,
   Signup,
-  UserHome,
   PortfolioHome,
   TransactionsHome,
   TradeHome
 } from './components'
 
 import {me} from './store'
-
-/**
- * COMPONENT
- */
 
 const Routes = props => {
   useEffect(
@@ -34,7 +29,7 @@ const Routes = props => {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route component={Login} />
+          {/* <Route component={Login} /> */}
         </Switch>
       )}
 
@@ -43,7 +38,7 @@ const Routes = props => {
           {/* Routes placed here are only available after logging in */}
 
           <Switch>
-            <Route path="/home" component={UserHome} />
+            {/* <Route path="/home" component={UserHome} /> */}
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />

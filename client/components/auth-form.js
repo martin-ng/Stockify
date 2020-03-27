@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
@@ -8,28 +9,96 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  console.log('props: ', props)
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
+    <div id="auth-container">
+      <h1>Welcome to Three Epsilon</h1>
+      {name === 'signup' ? (
+        <form id="auth-form" onSubmit={handleSubmit} name={name}>
+          <div id="auth-type">{displayName}</div>
+
+          {/* <div className="auth-input-container"> */}
+          <label htmlFor="firstName">
+            <small>First Name</small>
+          </label>
+          <input className="auth-input" name="firstName" type="text" />
+          {/* </div> */}
+
+          {/* <div className="auth-input-container"> */}
+          <label htmlFor="lastName">
+            <small>Last Name</small>
+          </label>
+          <input className="auth-input" name="lastName" type="text" />
+          {/* </div> */}
+
+          {/* <div className="auth-input-container"> */}
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
+          <input className="auth-input" name="email" type="email" />
+          {/* </div> */}
+
+          {/* <div className="auth-input-container"> */}
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input
+            className="auth-input"
+            placeholder="At least 8 characters"
+            name="password"
+            type="password"
+          />
+          {/* </div> */}
+
+          {/* <div className="auth-input-container"> */}
+          <label htmlFor="password">
+            <small>Re-enter password</small>
+          </label>
+          <input className="auth-input" name="password" type="password" />
+          {/* </div> */}
+
+          <button id="auth-button-container" type="submit">
+            Create your account
+          </button>
+
+          <p id="link-p">
+            Already have an account?
+            <Link className="link-question" to="/login">
+              Login
+            </Link>
+          </p>
+
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+      ) : (
+        <div id="auth-container">
+          <form id="auth-form" onSubmit={handleSubmit} name={name}>
+            <div id="auth-type">{displayName}</div>
+
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input className="auth-input" name="email" type="email" />
+
+            <label htmlFor="password">
+              <small>Re-enter password</small>
+            </label>
+            <input className="auth-input" name="password" type="password" />
+
+            <button id="auth-button-container" type="submit">
+              Continue
+            </button>
+
+            <h4 id="link-p">
+              Don't have an account?
+              <Link className="link-question" to="/signup">
+                Signup
+              </Link>
+            </h4>
+          </form>
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      )}
     </div>
   )
 }

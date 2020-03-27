@@ -1,3 +1,92 @@
+#auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px;
+}
+
+.auth {
+  margin-top: 5%;
+  width: 30%;
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#auth-buttons {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#auth-button-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#auth-type {
+  margin: 5%;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+#link-question {
+  position: relative;
+  padding-left: 10px;
+  padding-right: 9px;
+}
+
+#link-p {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.auth-divider {
+  display: block;
+  width: 100%;
+  height: 44px;
+  background-color: transparent;
+  background: -webkit-linear-gradient(
+    to right,
+    #fff,
+    rgba(255, 255, 255, 0),
+    #fff
+  );
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0), #fff);
+  z-index: 1;
+  content: '';
+}
+
+.auth-input-container {
+  display: flex;
+  width: 100%;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#auth-form {
+  width: 40%;
+  min-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: left;
+  justify-content: space-between;
+  padding: 40px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background: var(--off-white-opaque);
+}
+
 body {
   font-family: sans-serif;
 }
