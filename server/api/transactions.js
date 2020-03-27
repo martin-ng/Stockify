@@ -22,12 +22,13 @@ router.get('/', checkUser, async (req, res, next) => {
 // creates a new transaction
 router.post('/create', checkUser, async (req, res, next) => {
   try {
+    const details = req.body
+    console.log('details: ', details)
     const transaction = await Transactions.create({
-      datePurchased: req.body.datePurchased,
       action: req.body.action,
-      symbol: req.body.symbol,
-      priceAtPurchase: req.body.priceAtPurchase,
-      totalShares: req.body.totalShares,
+      symbol: req.body.ticker,
+      priceAtPurchase: req.body.price,
+      totalShares: req.body.quantity,
       userId: req.user.id
     })
 

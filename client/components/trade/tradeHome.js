@@ -24,6 +24,7 @@ const TradeHome = props => {
     let details = {
       action,
       ticker,
+      price: totalCost,
       quantity
     }
     console.log('details: ', details)
