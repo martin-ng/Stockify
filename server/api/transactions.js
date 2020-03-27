@@ -12,6 +12,12 @@ router.get('/', checkUser, async (req, res, next) => {
       }
     })
 
+    transactions.sort((a, b) => {
+      return b.dataValues.datePurchased.localeCompare(
+        a.dataValues.datePurchased
+      )
+    })
+
     if (!transactions) res.sendStatus(400)
     else res.json(transactions)
   } catch (error) {

@@ -84,11 +84,6 @@ const TradeHome = props => {
       </button>
       {/* <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div> */}
     </div>
-
-    // <div id="trade-container">
-    //   <h1>Cash Balance: ${user.cashBalance}</h1>
-    //   <TradeDetails />
-    // </div>
   )
 }
 
