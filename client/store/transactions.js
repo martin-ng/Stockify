@@ -37,13 +37,38 @@ export const getTransactionsThunk = () => async dispatch => {
 }
 
 export const makeTransactionsThunk = orderDetails => async dispatch => {
-  const {action, ticker, price, quantity} = orderDetails
-  const {data} = await axios.post('/api/transactions/create', {
-    action,
-    ticker,
-    price,
-    quantity
-  })
+  try {
+    let res
+    const {action, ticker, price, quantity} = orderDetails
+
+    res = await axios.post('/api/transactions/create', {
+      action,
+      ticker,
+      price,
+      quantity
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const makeSellTransactionsThunk = orderDetails => async dispatch => {
+  let res
+  try {
+    let action = orderDetails.action,
+      ticker = orderDetails.companySymbol,
+      price = orderDetails.stockPrice,
+      quantity = orderDetails.quantityToSell
+
+    res = await axios.post('/api/transactions/create', {
+      action,
+      ticker,
+      price,
+      quantity
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /**

@@ -69,9 +69,9 @@ async function seed() {
     Stocks.create({
       symbol: 'msft',
       companyName: 'Microsoft',
-      totalShares: 250,
+      totalShares: 15,
       userId: 1,
-      openingPrice: 300
+      openingPrice: 100
     }),
 
     Stocks.create({
@@ -79,7 +79,7 @@ async function seed() {
       companyName: 'American Water Works',
       totalShares: 10,
       userId: 1,
-      openingPrice: 450
+      openingPrice: 74
     }),
 
     Stocks.create({

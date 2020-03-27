@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {sellUpdatePortfolioThunk} from '../../store'
+import {sellUpdatePortfolioThunk, makeSellTransactionsThunk} from '../../store'
 
 const PortfolioList = props => {
   const {
@@ -20,15 +20,17 @@ const PortfolioList = props => {
     if (value === 0) return 'grey'
     return value > 0 ? 'green' : 'red'
   }
-
+  // const {action, ticker, price, quantity} = orderDetails
   const sellStock = (
     sharesOwned,
     quantityToSell,
     stockPrice,
     companySymbol
   ) => {
+    let action = 'SELL'
     let details = {sharesOwned, quantityToSell, stockPrice, companySymbol}
     props.sellShares(details)
+    props.makeTransaction({action, companySymbol, stockPrice, quantityToSell})
   }
 
   return (
@@ -71,7 +73,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    sellShares: details => dispatch(sellUpdatePortfolioThunk(details))
+    sellShares: details => dispatch(sellUpdatePortfolioThunk(details)),
+    makeTransaction: details => dispatch(makeSellTransactionsThunk(details))
   }
 }
 

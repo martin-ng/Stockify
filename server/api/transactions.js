@@ -32,7 +32,7 @@ router.get('/', checkUser, async (req, res, next) => {
 router.post('/create', checkUser, async (req, res, next) => {
   try {
     const {action, ticker, quantity} = req.body
-
+    console.log('req.body: ', req.body)
     const testRequest =
       `https://sandbox.iexapis.com/stable/stock/${ticker}/quote/?token=` +
       process.env.IEX_TEST_API_KEY

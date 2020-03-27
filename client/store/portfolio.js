@@ -51,8 +51,9 @@ export const buyUpdatePortfolio = details => async dispatch => {
 }
 
 export const sellUpdatePortfolioThunk = details => async dispatch => {
+  let res
   try {
-    const {data} = await axios.put('/api/portfolio/sell', {details})
+    res = await axios.put('/api/portfolio/sell', {details})
   } catch (error) {
     console.log(error)
   }

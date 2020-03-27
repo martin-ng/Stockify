@@ -36,17 +36,14 @@ const TradeHome = props => {
 
   //   return () => clearInterval(interval)
   // }, [])
+  // const [total, setTotal] = useState(0)
 
-  const calculateTotal = (shares, price, balance) => {
+  const calculateTotal = (shares, price) => {
     let total = +(shares * price).toFixed(2)
-    return balance - total
+    return total
   }
 
-  const totalCost = calculateTotal(
-    quantity,
-    company.latestPrice,
-    user.cashBalance
-  )
+  const totalCost = calculateTotal(quantity, company.latestPrice)
 
   const onClickHandler = action => {
     let details = {
@@ -66,19 +63,22 @@ const TradeHome = props => {
       getUser()
     } else if (quantity <= 0) {
       console.log('please put a number higher than 0')
-    } else if (user.cashBalance >= totalCoast) {
+    } else if (user.cashBalance >= totalCost) {
       console.log('You do not have enough money!')
     }
   }
-
+  console.log('props: ', props)
   return (
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
       <input
-        type="number"
+        type="text"
         placeholder="Search Company Ticker"
         name="symbol"
         onChange={event => {
+          if (event.target.value !== '') {
+            getTicker(event.target.value)
+          }
           setTicker(event.target.value)
         }}
       />
@@ -90,8 +90,8 @@ const TradeHome = props => {
             <p>Price: ${company.latestPrice}</p>
 
             <p>
-              Total :{' '}
-              {totalCost < 0
+              Total:
+              {+totalCost.toFixed(2) > user.cashBalance
                 ? 'You do not have enough money'
                 : '$' + totalCost.toFixed(2)}
             </p>

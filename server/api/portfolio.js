@@ -37,7 +37,10 @@ router.get('/', checkUser, async (req, res, next) => {
 router.put('/buy', checkUser, async (req, res, next) => {
   try {
     const {ticker, quantity, companyName, open} = req.body
-
+    console.log('ticker: ', ticker)
+    console.log('quantity: ', quantity)
+    console.log('companyname: ', companyName)
+    console.log('open: ', open)
     let symbol = ticker.toUpperCase()
     let amount = +parseInt(quantity).toFixed(2)
     let openPrice = +parseInt(open).toFixed(2)
@@ -98,7 +101,8 @@ router.put('/sell', checkUser, async (req, res, next) => {
       stock.totalShares = stock.totalShares - quantityToSell
       stock.save()
     }
-    res.sendStatus(400)
+    res.sendStatus(200)
+    // res.json(user)
   } catch (error) {
     next(error)
   }
