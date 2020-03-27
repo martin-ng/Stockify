@@ -50,7 +50,7 @@ export const signup = (
   }
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/portfolio')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -66,28 +66,28 @@ export const login = (email, password) => async dispatch => {
   }
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/portfolio')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
 }
 
-// export const auth = (firstName, lastName, email, password, method) => async dispatch => {
-//   let res
-//   try {
-//     console.log("TESTING SIGN UP: ", firstName, lastName, email, password, method)
-//     res = await axios.post(`/auth/${method}`, {firstName, lastName, email, password, method})
-//   } catch (authError) {
-//     return dispatch(getUser({error: authError}))
-//   }
+export const auth = (email, password, method) => async dispatch => {
+  let res
+  try {
+    console.log('TESTING SIGN UP: ', email, password, method)
+    res = await axios.post(`/auth/${method}`, {email, password, method})
+  } catch (authError) {
+    return dispatch(getUser({error: authError}))
+  }
 
-//   try {
-//     dispatch(getUser(res.data))
-//     history.push('/home')
-//   } catch (dispatchOrHistoryErr) {
-//     console.error(dispatchOrHistoryErr)
-//   }
-// }
+  try {
+    dispatch(getUser(res.data))
+    history.push('/portfolio')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
 
 // export const signup = (email, firstName, lastName, password, method) => async dispatch => {
 //   let res

@@ -16,10 +16,6 @@ const AuthForm = props => {
     error
   } = props
 
-  // console.log("NAME: ", name)
-  // console.log("handle: ", handleSubmit)
-  // console.log("props: ", props)
-
   return (
     <div id="auth-container">
       <h1>Welcome to Three Epsilon</h1>
@@ -65,12 +61,12 @@ const AuthForm = props => {
             Create your account
           </button>
 
-          <p id="link-p">
+          <h4 id="link-p">
             Already have an account?
             <Link className="link-question" to="/login">
               Login
             </Link>
-          </p>
+          </h4>
 
           {error && error.response && <div> {error.response.data} </div>}
         </form>
@@ -133,7 +129,6 @@ const mapDispatchSignup = dispatch => {
   return {
     handleSubmitSignUp(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
       const email = evt.target.signUpEmail.value
       const firstPassword = evt.target.firstPassword.value
       const secondPassword = evt.target.secondPassword.value
@@ -142,7 +137,7 @@ const mapDispatchSignup = dispatch => {
       if (firstPassword !== secondPassword) {
         alert('Passwords do not match!')
       } else {
-        dispatch(signup(email, firstName, lastName, firstPassword, formName))
+        dispatch(signup(email, firstName, lastName, firstPassword))
       }
     }
   }
@@ -152,7 +147,6 @@ const mapDispatchLogin = dispatch => {
   return {
     handleSubmitLogin(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
       const loginEmail = evt.target.loginEmail.value
       const loginPassword = evt.target.loginPassword.value
 

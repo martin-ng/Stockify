@@ -5,7 +5,8 @@ import {
   getTransactionsThunk,
   makeTransactionsThunk,
   getPortfolioThunk,
-  buyUpdatePortfolio
+  buyUpdatePortfolio,
+  me
 } from '../../store'
 
 const TradeHome = props => {
@@ -15,6 +16,7 @@ const TradeHome = props => {
 
   const {
     user,
+    getUser,
     getTicker,
     company,
     makeOrder,
@@ -23,6 +25,19 @@ const TradeHome = props => {
     updateTransactions
   } = props
   const {companyName, open} = props.company
+
+  // useEffect(() => {
+
+  //   const interval = setInterval(() => {
+  //     console.log('getting portfolio')
+  //     props.getPortfolio()
+  //     // portfolioValue(props.portfolio)
+  //   }, 5000)
+
+  //   return () => clearInterval(interval)
+  // }, [])
+
+  console.log('user: ', user)
 
   const calculateTotal = (shares, price) => {
     return +(shares * price).toFixed(2)
@@ -34,6 +49,10 @@ const TradeHome = props => {
     user.cashBalance
   )
 
+  const purchaseStatus = (totalCost, userBalance) => {
+    return !(totalCost > userBalance)
+  }
+
   const onClickHandler = action => {
     let details = {
       action,
@@ -44,13 +63,16 @@ const TradeHome = props => {
       open
     }
 
-    if (quantity > 0) {
+    if (quantity > 0 && user.cashBalance >= totalCost) {
       makeOrder(details)
       increasePortfolio(details)
       updatePortfolio()
       updateTransactions()
-    } else {
+      getUser()
+    } else if (quantity <= 0) {
       console.log('please put a number higher than 0')
+    } else if (user.cashBalance >= totalCoast) {
+      console.log('You do not have enough money!')
     }
   }
 
@@ -124,7 +146,8 @@ const mapDispatch = dispatch => {
     increasePortfolio: orderDetails =>
       dispatch(buyUpdatePortfolio(orderDetails)),
     updatePortfolio: () => dispatch(getPortfolioThunk()),
-    updateTransactions: () => dispatch(getTransactionsThunk())
+    updateTransactions: () => dispatch(getTransactionsThunk()),
+    getUser: () => dispatch(me())
   }
 }
 

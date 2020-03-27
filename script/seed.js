@@ -76,7 +76,7 @@ async function seed() {
 
     Stocks.create({
       symbol: 'awk',
-      companyName: 'American Water wORKS',
+      companyName: 'American Water Works',
       totalShares: 10,
       userId: 1,
       openingPrice: 450
