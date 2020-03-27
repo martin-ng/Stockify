@@ -1,61 +1,64 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {auth, signup, login} from '../store'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
-  console.log('props: ', props)
+  const {
+    name,
+    displayName,
+    handleSubmitSignUp,
+    handleSubmitLogin,
+    error
+  } = props
+
+  // console.log("NAME: ", name)
+  // console.log("handle: ", handleSubmit)
+  // console.log("props: ", props)
 
   return (
     <div id="auth-container">
       <h1>Welcome to Three Epsilon</h1>
       {name === 'signup' ? (
-        <form id="auth-form" onSubmit={handleSubmit} name={name}>
+        <form id="auth-form" onSubmit={handleSubmitSignUp} name={name}>
           <div id="auth-type">{displayName}</div>
 
           {/* <div className="auth-input-container"> */}
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
+
+          <small>First Name</small>
+
           <input className="auth-input" name="firstName" type="text" />
           {/* </div> */}
 
           {/* <div className="auth-input-container"> */}
-          <label htmlFor="lastName">
-            <small>Last Name</small>
-          </label>
+
+          <small>Last Name</small>
+
           <input className="auth-input" name="lastName" type="text" />
           {/* </div> */}
 
           {/* <div className="auth-input-container"> */}
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input className="auth-input" name="email" type="email" />
+
+          <small>Email</small>
+          <input className="auth-input" name="signUpEmail" type="email" />
           {/* </div> */}
 
           {/* <div className="auth-input-container"> */}
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input
-            className="auth-input"
-            placeholder="At least 8 characters"
-            name="password"
-            type="password"
-          />
+
+          <small>Password</small>
+
+          <input className="auth-input" name="firstPassword" type="password" />
           {/* </div> */}
 
           {/* <div className="auth-input-container"> */}
-          <label htmlFor="password">
-            <small>Re-enter password</small>
-          </label>
-          <input className="auth-input" name="password" type="password" />
+
+          <small>Re-enter password</small>
+
+          <input className="auth-input" name="secondPassword" type="password" />
           {/* </div> */}
 
           <button id="auth-button-container" type="submit">
@@ -73,18 +76,20 @@ const AuthForm = props => {
         </form>
       ) : (
         <div id="auth-container">
-          <form id="auth-form" onSubmit={handleSubmit} name={name}>
+          <form id="auth-form" onSubmit={handleSubmitLogin} name={name}>
             <div id="auth-type">{displayName}</div>
 
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input className="auth-input" name="email" type="email" />
+            <small>Email</small>
 
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input className="auth-input" name="password" type="password" />
+            <input className="auth-input" name="loginEmail" type="email" />
+
+            <small>Password</small>
+
+            <input
+              className="auth-input"
+              name="loginPassword"
+              type="password"
+            />
 
             <button id="auth-button-container" type="submit">
               Continue
@@ -105,10 +110,8 @@ const AuthForm = props => {
 
 /**
  * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
+ *   Note that we have two different sets of 'mapStateToProps' and mapDispatch functions -
+ *   one for Login, and one for Signup.
  */
 const mapLogin = state => {
   return {
@@ -126,27 +129,37 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatchSignup = dispatch => {
   return {
-    handleSubmit(evt) {
+    handleSubmitSignUp(evt) {
       evt.preventDefault()
       const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const email = evt.target.signUpEmail.value
+      const firstPassword = evt.target.firstPassword.value
+      const secondPassword = evt.target.secondPassword.value
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
+      if (firstPassword !== secondPassword) {
+        alert('Passwords do not match!')
+      } else {
+        dispatch(signup(email, firstName, lastName, firstPassword, formName))
+      }
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+const mapDispatchLogin = dispatch => {
+  return {
+    handleSubmitLogin(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const loginEmail = evt.target.loginEmail.value
+      const loginPassword = evt.target.loginPassword.value
 
-/**
- * PROP TYPES
- */
-AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+      dispatch(login(loginEmail, loginPassword))
+    }
+  }
 }
+
+export const Login = connect(mapLogin, mapDispatchLogin)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatchSignup)(AuthForm)

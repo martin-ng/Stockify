@@ -13,7 +13,7 @@ const PortfolioHome = props => {
       console.log('getting portfolio')
       props.getPortfolio()
       // portfolioValue(props.portfolio)
-    }, 5000)
+    }, 500000)
 
     async function fetchData() {
       await props.getPortfolio()

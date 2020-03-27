@@ -37,7 +37,6 @@ export const getTransactionsThunk = () => async dispatch => {
 }
 
 export const makeTransactionsThunk = orderDetails => async dispatch => {
-  console.log('order details: ', orderDetails)
   const {action, ticker, price, quantity} = orderDetails
   const {data} = await axios.post('/api/transactions/create', {
     action,
@@ -51,7 +50,6 @@ export const makeTransactionsThunk = orderDetails => async dispatch => {
  * REDUCER
  */
 export default function(state = defaultTransactions, action) {
-  console.log('action transactions; ', action.transactions)
   switch (action.type) {
     case GOT_TRANSACTIONS:
       return {

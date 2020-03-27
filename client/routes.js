@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Router} from 'react-router-dom'
+import {withRouter, Route, Switch, Router, Redirect} from 'react-router-dom'
 import history from './history'
 import PropTypes from 'prop-types'
 import {
@@ -27,18 +27,24 @@ const Routes = props => {
       {/* Routes placed here are available to all visitors */}
       {!isLoggedIn && (
         <Switch>
+          <Redirect exact from="/" to="/login" />
+          <Redirect exact from="/home" to="/login" />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          {/* <Route component={Login} /> */}
         </Switch>
       )}
 
+      {/* <Route exact path="/">
+{loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
+</Route> */}
       {isLoggedIn && (
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
 
           <Switch>
             {/* <Route path="/home" component={UserHome} /> */}
+            <Redirect exact from="/" to="/portfolio" />
+            <Redirect exact from="/home" to="/portfolio" />
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />

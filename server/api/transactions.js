@@ -48,8 +48,6 @@ router.post('/create', checkUser, async (req, res, next) => {
       userId: req.user.id
     })
 
-    console.log('quantity: ', typeof quantity)
-    console.log('latestPrice: ', typeof latestPrice)
     const balanceOwed = +parseInt(quantity).toFixed(2) * latestPrice
 
     let user = await User.findOne({

@@ -45,7 +45,6 @@ const TradeHome = props => {
     }
 
     if (quantity > 0) {
-      console.log('pROPS USER: ', props)
       makeOrder(details)
       increasePortfolio(details)
       updatePortfolio()

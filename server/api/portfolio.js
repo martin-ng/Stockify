@@ -20,7 +20,6 @@ router.get('/', checkUser, async (req, res, next) => {
       // console.log(stock.dataValues.symbol)
       // const request = `https://cloud.iexapis.com/stable/stock/${symbol}/quote/?token=` + process.env.IEX_API_KEY
       // const { data } = await axios.get(request)
-      // https://cloud.iexapis.com/stable/stock/TSLA/quote?token=sk_edabb0e6eaa1436b850efa52d3deac48
       const testRequest =
         `https://sandbox.iexapis.com/stable/stock/${symbol}/quote/?token=` +
         process.env.IEX_TEST_API_KEY
