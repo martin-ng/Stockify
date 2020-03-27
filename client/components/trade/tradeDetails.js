@@ -4,17 +4,22 @@ import {me, getTickersThunk} from '../../store'
 
 const TradeDetails = props => {
   const [quantity, setQuantity] = useState(0)
-  const [ticker, setTicker] = useState('')
-
-  const [symbol, setSymbol] = useState('')
-  const [latestPrice, setLatestPrice] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
   const [errorMsg, setError] = useState('')
 
-  const {user, getTicker, company} = props
+  const calculateTotal = (shares, price, balance) => {
+    let total = +(shares * price).toFixed(2)
+    console.log('TOTAL: ', total)
+    console.log('balance: ', balance)
+    return total <= balance ? total : -1
+  }
 
-  console.log('company: ', company)
-  console.log('price: ', company.latestPrice)
+  const {user, getTicker, company} = props
+  const totalCost = calculateTotal(
+    quantity,
+    company.latestPrice,
+    user.cashBalance
+  )
+
   return (
     <div>
       <div>
@@ -32,11 +37,19 @@ const TradeDetails = props => {
           />
           {company.symbol ? (
             <div>
-              <h1>{company.symbol}</h1>
-              <div>
-                <h2>{company.companyName}</h2>
-                <p>Price: ${company.latestPrice}</p>
-              </div>
+              <form>
+                <h1>{company.symbol}</h1>
+                <div>
+                  <h2>{company.companyName}</h2>
+                  <p>Price: ${company.latestPrice}</p>
+                  {totalCost === -1 ? (
+                    <p>You do not have enough money!</p>
+                  ) : (
+                    <p>Total : ${totalCost}</p>
+                  )}
+                </div>
+                <button type="submit">Checkout</button>
+              </form>
             </div>
           ) : (
             <div />
@@ -55,6 +68,7 @@ const TradeDetails = props => {
               }
             }}
           />
+
           <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div>
         </div>
       </div>

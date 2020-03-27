@@ -38,19 +38,3 @@ router.get('/', checkUser, async (req, res, next) => {
     next(error)
   }
 })
-
-// testing get value as well
-router.get('/update', checkUser, async (req, res, next) => {
-  try {
-    const stocks = await Stocks.findAll({
-      where: {
-        userId: req.user.id
-      }
-    })
-
-    if (!stocks) res.sendStatus(404)
-    else res.json(stocks)
-  } catch (error) {
-    next(error)
-  }
-})

@@ -21,12 +21,12 @@ const PortfolioList = props => {
   return (
     <div>
       <div>
-        <h2>{symbol}</h2>
+        <h2 style={{color: stockColor(difference)}}>{symbol}</h2>
         <h3>{companyName}</h3>
       </div>
       <div>
-        <p style={{color: stockColor(difference)}}>Total Value {totalValue}</p>
         <p>Total shares: {totalShares}</p>
+        <p style={{color: stockColor(difference)}}>${totalValue}/share</p>
       </div>
     </div>
   )
