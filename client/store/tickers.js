@@ -11,7 +11,7 @@ const GOT_TICKERS = 'GET_TICKERS'
  * INITIAL STATE
  */
 const defaultTickers = {
-  tickersInfo: {}
+  company: {}
 }
 
 /**
@@ -40,7 +40,7 @@ export default function(state = defaultTickers, action) {
   switch (action.type) {
     case GOT_TICKERS:
       return {
-        tickers: {...action.tickers}
+        company: {...action.tickers}
       }
 
     default:

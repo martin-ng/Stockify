@@ -3,22 +3,23 @@ import {connect} from 'react-redux'
 import {me, getTickersThunk} from '../../store'
 
 const TradeDetails = props => {
-  const [quantity, setQuantity] = useState('')
-  const [ticker, setTicker] = useState(1)
-  const [amount, setAmount] = useState(0)
+  const [quantity, setQuantity] = useState(0)
+  const [ticker, setTicker] = useState('')
+
+  const [symbol, setSymbol] = useState('')
+  const [latestPrice, setLatestPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
   const [errorMsg, setError] = useState('')
 
-  const {user, getTicker, symbols} = props
+  const {user, getTicker, company} = props
 
+  console.log('company: ', company)
+  console.log('price: ', company.latestPrice)
   return (
-    <div id="trade-container">
+    <div>
       <div>
         <div>
-          <h1>Cash Balance: ${user.cashBalance}</h1>
-        </div>
-        <div>
           <input
-            className="trade-box-container"
             type="text"
             placeholder="Search Company Ticker"
             name="symbol"
@@ -29,17 +30,26 @@ const TradeDetails = props => {
               setTicker(event.target.value)
             }}
           />
-          <TradeDetails props={symbols} />
+          {company.symbol ? (
+            <div>
+              <h1>{company.symbol}</h1>
+              <div>
+                <h2>{company.companyName}</h2>
+                <p>Price: ${company.latestPrice}</p>
+              </div>
+            </div>
+          ) : (
+            <div />
+          )}
           <input
-            className="trade-box-container"
             type="text"
             placeholder="Amount"
             name="symbol quantity"
-            value={amount}
+            value={quantity}
             onChange={event => {
               const regex = /^\d+$/
               if (event.target.value === '' || regex.test(event.target.value)) {
-                setAmount(event.target.value)
+                setQuantity(event.target.value)
               } else {
                 setError('Please input a number!')
               }
@@ -57,7 +67,7 @@ const TradeDetails = props => {
  */
 const mapState = state => {
   return {
-    symbols: state.tickers,
+    company: state.tickers.company,
     user: state.user,
     isLoggedIn: !!state.user.id
   }
