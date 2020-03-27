@@ -11,8 +11,6 @@ const TransactionsHome = props => {
 
   const {transactions} = props
 
-  console.log('TRANSACTIONS: ', transactions)
-
   return (
     <div id="transactions-container">
       <div>

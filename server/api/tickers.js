@@ -6,7 +6,6 @@ module.exports = router
 // get all company's tickers
 router.get('/:ticker', checkUser, async (req, res, next) => {
   try {
-    console.log('req params: ', req.params)
     const {ticker} = req.params
 
     let testRequest =
@@ -14,7 +13,6 @@ router.get('/:ticker', checkUser, async (req, res, next) => {
       process.env.IEX_TEST_API_KEY
 
     const {data} = await axios.get(testRequest)
-    console.log('data: ', data)
     if (!data) res.sendStatus(404)
     else res.json(data)
   } catch (error) {

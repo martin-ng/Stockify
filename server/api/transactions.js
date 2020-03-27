@@ -29,7 +29,6 @@ router.get('/', checkUser, async (req, res, next) => {
 router.post('/create', checkUser, async (req, res, next) => {
   try {
     const details = req.body
-    console.log('details: ', details)
     const transaction = await Transactions.create({
       action: req.body.action,
       symbol: req.body.ticker,

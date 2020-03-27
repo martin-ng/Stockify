@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getPortfolioThunk} from '../../store'
 import PortfolioList from './portfolioList'

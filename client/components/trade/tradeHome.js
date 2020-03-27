@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getTickersThunk, makeTransactionsThunk} from '../../store'
+import {
+  getTickersThunk,
+  makeTransactionsThunk,
+  buyUpdatePortfolio
+} from '../../store'
 import TradeDetails from './tradeDetails'
 
 const TradeHome = props => {
@@ -8,7 +12,8 @@ const TradeHome = props => {
   const [quantity, setQuantity] = useState(0)
   const [errorMsg, setError] = useState('')
 
-  const {user, getTicker, company, makeOrder} = props
+  const {user, getTicker, company, makeOrder, increasePortfolio} = props
+  const {companyName} = props.company
 
   const calculateTotal = (shares, price) => {
     return +(shares * price).toFixed(2)
@@ -25,11 +30,14 @@ const TradeHome = props => {
       action,
       ticker,
       price: totalCost,
-      quantity
+      quantity,
+      companyName
     }
-    console.log('details: ', details)
+
     if (quantity > 0) {
+      console.log('pROPS USER: ', props)
       makeOrder(details)
+      increasePortfolio(details)
     } else {
       console.log('please put a number higher than 0')
     }
@@ -101,7 +109,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getTicker: ticker => dispatch(getTickersThunk(ticker)),
-    makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails))
+    makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails)),
+    increasePortfolio: orderDetails =>
+      dispatch(buyUpdatePortfolio(orderDetails))
   }
 }
 

@@ -14,7 +14,6 @@ router.get('/', checkUser, async (req, res, next) => {
     })
 
     // adds price pulled from API to each stock object
-
     for (let stock of portfolio) {
       let symbol = stock.symbol
       // console.log(symbol)
@@ -34,6 +33,30 @@ router.get('/', checkUser, async (req, res, next) => {
 
     if (!portfolio) res.sendStatus(404)
     else res.json(portfolio)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/increase', checkUser, async (req, res, next) => {
+  try {
+    const {ticker, quantity, companyName} = req.body
+    console.log('quantity: ', quantity)
+    console.log('name: ', companyName)
+    let symbol = ticker.toUpperCase()
+    let amount = +parseInt(quantity).toFixed(2)
+
+    const stock = await Stocks.findOne({
+      where: {symbol, userId: req.user.id}
+    })
+
+    if (stock) {
+      stock.totalShares += amount
+      let updatedStock = await stock.save()
+    } else {
+      // const newStock = await Stocks.create({
+      // })
+    }
   } catch (error) {
     next(error)
   }
