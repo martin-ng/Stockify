@@ -16,10 +16,7 @@ router.get('/', checkUser, async (req, res, next) => {
     // adds price pulled from API to each stock object
     for (let stock of portfolio) {
       let symbol = stock.symbol
-      // console.log(symbol)
-      // console.log(stock.dataValues.symbol)
-      // const request = `https://cloud.iexapis.com/stable/stock/${symbol}/quote/?token=` + process.env.IEX_API_KEY
-      // const { data } = await axios.get(request)
+
       const testRequest =
         `https://sandbox.iexapis.com/stable/stock/${symbol}/quote/?token=` +
         process.env.IEX_TEST_API_KEY

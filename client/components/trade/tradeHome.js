@@ -37,8 +37,6 @@ const TradeHome = props => {
   //   return () => clearInterval(interval)
   // }, [])
 
-  console.log('user: ', user)
-
   const calculateTotal = (shares, price) => {
     return +(shares * price).toFixed(2)
   }

@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GOT_PORTFOLIO = 'GET_PORTFOLIO'
+const GOT_PORTFOLIO_VALUE = 'GET_PORTFOLIO_VALUE'
 const BUY_UPDATE_VALUE = 'GOT_VALUE'
 
 /**
@@ -12,16 +13,15 @@ const BUY_UPDATE_VALUE = 'GOT_VALUE'
  */
 const defaultPortfolio = {
   stocks: [],
-  portfolioValue: 0,
-  test: []
+  portfolioValue: 0
 }
 
 /**
  * ACTION CREATORS
  */
 const gotPortfolio = portfolio => ({type: GOT_PORTFOLIO, portfolio})
+// const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
 const buyUpdateValue = details => ({type: BUY_UPDATE_VALUE, details})
-const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
 /**
  * THUNK CREATORS
  */
@@ -64,9 +64,17 @@ export const updatePortfolioValueThunk = () => async dispatch => {
 export default function(state = defaultPortfolio, action) {
   switch (action.type) {
     case GOT_PORTFOLIO:
+      let portfolioValue = 0
+
+      action.portfolio.forEach(stock => {
+        let element = stock.latestPrice
+        element = +element.toFixed(2)
+        portfolioValue += element * stock.totalShares
+      })
+
       return {
         stocks: [...action.portfolio],
-        totalValue: state.totalValue
+        portfolioValue
       }
     default:
       return state
