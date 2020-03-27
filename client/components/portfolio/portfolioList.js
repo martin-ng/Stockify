@@ -35,28 +35,34 @@ const PortfolioList = props => {
 
   return (
     <div>
-      <div>
+      <div className="portfolio-list-row">
         <h2 style={{color: stockColor(difference)}}>{symbol}</h2>
         <h3>{companyName}</h3>
       </div>
-      <div>
-        <p>Total shares: {totalShares}</p>
-        <p style={{color: stockColor(difference)}}>Total: ${totalValue}</p>
-        <input
-          type="number"
-          name="symbol quantity"
-          placeholder={quantity}
-          onChange={event => {
-            setQuantity(event.target.value)
-          }}
-        />
-        <button
-          type="submit"
-          disabled={quantity > totalShares}
-          onClick={() => sellStock(totalShares, quantity, latestPrice, symbol)}
-        >
-          Sell
-        </button>
+      <div className="portfolio-list-row">
+        <div>
+          <p>Total shares: {totalShares}</p>
+          <p style={{color: stockColor(difference)}}>Total: ${totalValue}</p>
+        </div>
+        <div>
+          <input
+            type="number"
+            name="symbol quantity"
+            placeholder={quantity}
+            onChange={event => {
+              setQuantity(event.target.value)
+            }}
+          />
+          <button
+            type="submit"
+            disabled={quantity > totalShares}
+            onClick={() =>
+              sellStock(totalShares, quantity, latestPrice, symbol)
+            }
+          >
+            Sell
+          </button>
+        </div>
       </div>
       <div className="portfolio-border" />
     </div>

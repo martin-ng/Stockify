@@ -12,8 +12,7 @@ const app = express()
 const socketio = require('socket.io')
 require('dotenv').config()
 module.exports = app
-console.log('process: ', process.env.IEX_TEST_API_KEY)
-console.log('testing!')
+
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === 'test') {

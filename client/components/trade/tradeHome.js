@@ -12,6 +12,7 @@ import {
 const TradeHome = props => {
   const [ticker, setTicker] = useState('')
   const [quantity, setQuantity] = useState(0)
+  const [count, setCount] = useState(0)
   const [errorMsg, setError] = useState('')
 
   const {
@@ -26,17 +27,12 @@ const TradeHome = props => {
   } = props
   const {companyName, open} = props.company
 
-  // useEffect(() => {
-
-  //   const interval = setInterval(() => {
-  //     console.log('getting portfolio')
-  //     props.getPortfolio()
-  //     // portfolioValue(props.portfolio)
-  //   }, 5000)
-
-  //   return () => clearInterval(interval)
-  // }, [])
-  // const [total, setTotal] = useState(0)
+  useEffect(
+    () => {
+      getUser()
+    },
+    [ticker, quantity, count]
+  )
 
   const calculateTotal = (shares, price) => {
     let total = +(shares * price).toFixed(2)
@@ -44,6 +40,10 @@ const TradeHome = props => {
   }
 
   const totalCost = calculateTotal(quantity, company.latestPrice)
+
+  const changeHandler = () => {
+    setCount(0)
+  }
 
   const onClickHandler = action => {
     let details = {
@@ -57,6 +57,7 @@ const TradeHome = props => {
 
     if (quantity > 0 && user.cashBalance >= totalCost) {
       makeOrder(details)
+      changeHandler()
       increasePortfolio(details)
       updatePortfolio()
       updateTransactions()
@@ -67,7 +68,7 @@ const TradeHome = props => {
       console.log('You do not have enough money!')
     }
   }
-  console.log('props: ', props)
+
   return (
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
@@ -98,9 +99,9 @@ const TradeHome = props => {
 
             <input
               type="text"
+              id="quantity-field"
               name="symbol quantity"
               value={quantity}
-              placeholder={quantity}
               onChange={event => {
                 const regex = /^\d+$/
                 if (
@@ -114,7 +115,8 @@ const TradeHome = props => {
               }}
             />
             <button
-              type="submit"
+              type="reset"
+              defaultValue="Reset"
               disabled={quantity <= 0 || totalCost < 0}
               onClick={() => onClickHandler('BUY')}
             >

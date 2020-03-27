@@ -23,39 +23,17 @@ const AuthForm = props => {
         <form id="auth-form" onSubmit={handleSubmitSignUp} name={name}>
           <div id="auth-type">{displayName}</div>
 
-          {/* <div className="auth-input-container"> */}
-
           <small>First Name</small>
-
           <input className="auth-input" name="firstName" type="text" />
-          {/* </div> */}
-
-          {/* <div className="auth-input-container"> */}
 
           <small>Last Name</small>
-
           <input className="auth-input" name="lastName" type="text" />
-          {/* </div> */}
-
-          {/* <div className="auth-input-container"> */}
 
           <small>Email</small>
           <input className="auth-input" name="signUpEmail" type="email" />
-          {/* </div> */}
-
-          {/* <div className="auth-input-container"> */}
 
           <small>Password</small>
-
           <input className="auth-input" name="firstPassword" type="password" />
-          {/* </div> */}
-
-          {/* <div className="auth-input-container"> */}
-
-          <small>Re-enter password</small>
-
-          <input className="auth-input" name="secondPassword" type="password" />
-          {/* </div> */}
 
           <button id="auth-button-container" type="submit">
             Create your account
@@ -76,11 +54,9 @@ const AuthForm = props => {
             <div id="auth-type">{displayName}</div>
 
             <small>Email</small>
-
             <input className="auth-input" name="loginEmail" type="email" />
 
             <small>Password</small>
-
             <input
               className="auth-input"
               name="loginPassword"
@@ -131,14 +107,9 @@ const mapDispatchSignup = dispatch => {
       evt.preventDefault()
       const email = evt.target.signUpEmail.value
       const firstPassword = evt.target.firstPassword.value
-      const secondPassword = evt.target.secondPassword.value
       const firstName = evt.target.firstName.value
       const lastName = evt.target.lastName.value
-      if (firstPassword !== secondPassword) {
-        alert('Passwords do not match!')
-      } else {
-        dispatch(signup(email, firstName, lastName, firstPassword))
-      }
+      dispatch(signup(email, firstName, lastName, firstPassword))
     }
   }
 }

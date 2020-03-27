@@ -14,9 +14,7 @@ router.get('/', checkUser, async (req, res, next) => {
     })
 
     transactions.sort((a, b) => {
-      return b.dataValues.datePurchased.localeCompare(
-        a.dataValues.datePurchased
-      )
+      return b.datePurchased.localeCompare(a.datePurchased)
     })
 
     if (!transactions) res.sendStatus(400)
@@ -32,7 +30,6 @@ router.get('/', checkUser, async (req, res, next) => {
 router.post('/create', checkUser, async (req, res, next) => {
   try {
     const {action, ticker, quantity} = req.body
-    console.log('req.body: ', req.body)
     const testRequest =
       `https://sandbox.iexapis.com/stable/stock/${ticker}/quote/?token=` +
       process.env.IEX_TEST_API_KEY
