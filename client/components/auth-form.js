@@ -18,7 +18,7 @@ const AuthForm = props => {
 
   return (
     <div id="auth-container">
-      <h1>Welcome to Three Epsilon</h1>
+      <h1>Welcome to Stockify</h1>
       {name === 'signup' ? (
         <form id="auth-form" onSubmit={handleSubmitSignUp} name={name}>
           <div id="auth-type">{displayName}</div>
