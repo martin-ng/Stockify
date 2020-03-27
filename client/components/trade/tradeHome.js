@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {
   getTickersThunk,
+  getTransactionsThunk,
   makeTransactionsThunk,
   getPortfolioThunk,
   buyUpdatePortfolio
 } from '../../store'
-import TradeDetails from './tradeDetails'
 
 const TradeHome = props => {
   const [ticker, setTicker] = useState('')
@@ -19,7 +19,8 @@ const TradeHome = props => {
     company,
     makeOrder,
     increasePortfolio,
-    updatePortfolio
+    updatePortfolio,
+    updateTransactions
   } = props
   const {companyName, open} = props.company
 
@@ -48,6 +49,7 @@ const TradeHome = props => {
       makeOrder(details)
       increasePortfolio(details)
       updatePortfolio()
+      updateTransactions()
     } else {
       console.log('please put a number higher than 0')
     }
@@ -122,7 +124,8 @@ const mapDispatch = dispatch => {
     makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails)),
     increasePortfolio: orderDetails =>
       dispatch(buyUpdatePortfolio(orderDetails)),
-    updatePortfolio: () => dispatch(getPortfolioThunk())
+    updatePortfolio: () => dispatch(getPortfolioThunk()),
+    updateTransactions: () => dispatch(getTransactionsThunk())
   }
 }
 

@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const axios = require('axios')
-const {Stocks} = require('../db/models')
+const {User, Stocks} = require('../db/models')
 const {checkUser} = require('../utils')
 module.exports = router
 
@@ -62,9 +62,13 @@ router.put('/increase', checkUser, async (req, res, next) => {
         totalShares: amount,
         userId: req.user.id
       })
-      console.log('newStock: ', newStock.dataValues)
       res.json(newStock)
     }
+
+    let user = await User.findOne({
+      userId: req.user.id
+    })
+    console.log('user: ', user)
   } catch (error) {
     next(error)
   }

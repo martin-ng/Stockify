@@ -5,11 +5,11 @@ import {getTransactionsThunk} from '../../store'
 import TransactionsList from './transactionsList'
 
 const TransactionsHome = props => {
-  useEffect(() => {
-    props.getTransactions()
-  }, [])
+  const {transactions, getTransactions} = props
 
-  const {transactions} = props
+  useEffect(() => {
+    getTransactions()
+  }, [])
 
   return (
     <div id="transactions-container">

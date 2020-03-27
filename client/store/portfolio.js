@@ -52,7 +52,6 @@ export const buyUpdatePortfolio = details => async dispatch => {
 export const updatePortfolioValueThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/portfolio')
-    console.log('THUNK DATA: ', data)
     dispatch(gotPortfolio(data))
   } catch (error) {
     console.log(error)

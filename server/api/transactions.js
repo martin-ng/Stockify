@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {User, Stocks, Transactions} = require('../db/models')
 const {checkUser} = require('../utils')
+const axios = require('axios')
 module.exports = router
 
 // get user's transaction history
@@ -28,12 +29,20 @@ router.get('/', checkUser, async (req, res, next) => {
 // creates a new transaction
 router.post('/create', checkUser, async (req, res, next) => {
   try {
-    const details = req.body
+    const {action, ticker, quantity} = req.body
+
+    const testRequest =
+      `https://sandbox.iexapis.com/stable/stock/${ticker}/quote/?token=` +
+      process.env.IEX_TEST_API_KEY
+    const {data} = await axios.get(testRequest)
+
+    const latestPrice = data.latestPrice
+
     const transaction = await Transactions.create({
-      action: req.body.action,
-      symbol: req.body.ticker,
-      priceAtPurchase: req.body.price,
-      totalShares: req.body.quantity,
+      action: action,
+      symbol: ticker,
+      priceAtPurchase: latestPrice,
+      totalShares: quantity,
       userId: req.user.id
     })
 
