@@ -82,7 +82,7 @@ const AuthForm = props => {
             <input className="auth-input" name="email" type="email" />
 
             <label htmlFor="password">
-              <small>Re-enter password</small>
+              <small>Password</small>
             </label>
             <input className="auth-input" name="password" type="password" />
 
