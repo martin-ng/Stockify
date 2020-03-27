@@ -4,7 +4,6 @@ import {getPortfolioThunk} from '../../store'
 import PortfolioList from './portfolioList'
 
 const PortfolioHome = props => {
-  const [totalValue, setTotalValue] = useState(0)
   const {stocks, portfolioValue} = props.portfolio
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const PortfolioHome = props => {
           return <PortfolioList key={stock.id} stock={stock} />
         })
       ) : (
-        <h3>YOU DO NOT OWN STOCKS</h3>
+        <h3>You do not own stocks.</h3>
       )}
     </div>
   )

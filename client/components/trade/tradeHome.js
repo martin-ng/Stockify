@@ -37,8 +37,9 @@ const TradeHome = props => {
   //   return () => clearInterval(interval)
   // }, [])
 
-  const calculateTotal = (shares, price) => {
-    return +(shares * price).toFixed(2)
+  const calculateTotal = (shares, price, balance) => {
+    let total = +(shares * price).toFixed(2)
+    return balance - total
   }
 
   const totalCost = calculateTotal(
@@ -46,10 +47,6 @@ const TradeHome = props => {
     company.latestPrice,
     user.cashBalance
   )
-
-  const purchaseStatus = (totalCost, userBalance) => {
-    return !(totalCost > userBalance)
-  }
 
   const onClickHandler = action => {
     let details = {
@@ -94,34 +91,44 @@ const TradeHome = props => {
           <div>
             <h2>{company.companyName}</h2>
             <p>Price: ${company.latestPrice}</p>
-            {totalCost > user.cashBalance ? (
-              <p>You do not have enough money!</p>
-            ) : (
-              <p>Total : ${totalCost}</p>
-            )}
+
+            <p>
+              Total :{' '}
+              {totalCost < 0
+                ? 'You do not have enough money'
+                : '$' + totalCost.toFixed(2)}
+            </p>
+
+            <input
+              type="text"
+              name="symbol quantity"
+              value={quantity}
+              placeholder={quantity}
+              onChange={event => {
+                const regex = /^\d+$/
+                if (
+                  event.target.value === '' ||
+                  regex.test(event.target.value)
+                ) {
+                  setQuantity(event.target.value)
+                } else {
+                  setError('Please input a number!')
+                }
+              }}
+            />
+            <button
+              type="submit"
+              disabled={quantity <= 0 || totalCost < 0}
+              onClick={() => onClickHandler('BUY')}
+            >
+              Checkout
+            </button>
+            <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div>
           </div>
         </div>
       ) : (
         <div />
       )}
-      <input
-        type="text"
-        placeholder="Amount"
-        name="symbol quantity"
-        value={quantity}
-        onChange={event => {
-          const regex = /^\d+$/
-          if (event.target.value === '' || regex.test(event.target.value)) {
-            setQuantity(event.target.value)
-          } else {
-            setError('Please input a number!')
-          }
-        }}
-      />
-      <button type="submit" onClick={() => onClickHandler('BUY')}>
-        Checkout
-      </button>
-      {/* <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div> */}
     </div>
   )
 }
