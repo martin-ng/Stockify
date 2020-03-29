@@ -37,7 +37,6 @@ const Routes = props => {
       {isLoggedIn && (
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
-
           <Switch>
             <Redirect exact from="/" to="/portfolio" />
             <Redirect exact from="/home" to="/portfolio" />
@@ -67,9 +66,6 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData: () => dispatch(me())
-    // loadInitialData() {
-    //   dispatch(me())
-    // }
   }
 }
 

@@ -1,12 +1,9 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
  */
 const GOT_PORTFOLIO = 'GET_PORTFOLIO'
-const GOT_PORTFOLIO_VALUE = 'GET_PORTFOLIO_VALUE'
-const BUY_UPDATE_VALUE = 'GOT_VALUE'
 
 /**
  * INITIAL STATE
@@ -21,8 +18,7 @@ const defaultPortfolio = {
  */
 const gotPortfolio = portfolio => ({type: GOT_PORTFOLIO, portfolio})
 // const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
-const buyUpdateValue = details => ({type: BUY_UPDATE_VALUE, details})
-const sellUpdateValue = details => ({type: SELL_UPDATE_VALUE, details})
+
 /**
  * THUNK CREATORS
  */

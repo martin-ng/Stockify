@@ -1,11 +1,9 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
  */
 const GOT_TICKERS = 'GET_TICKERS'
-// const UPDATE_VALUE = 'GOT_VALUE'
 
 /**
  * INITIAL STATE

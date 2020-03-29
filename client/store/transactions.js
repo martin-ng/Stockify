@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 import {getPortfolioThunk} from './portfolio'
 
 /**
@@ -18,10 +17,6 @@ const defaultTransactions = {
  * ACTION CREATORS
  */
 const gotTransactions = transactions => ({type: GOT_TRANSACTIONS, transactions})
-// const makeTransactions = orderDetails => ({
-//   type: MAKE_TRANSACTIONS,
-//   orderDetails
-// })
 
 /**
  * THUNK CREATORS
