@@ -1,11 +1,11 @@
 import axios from 'axios'
 import history from '../history'
+import {getPortfolioThunk} from './portfolio'
 
 /**
  * ACTION TYPES
  */
 const GOT_TRANSACTIONS = 'GET_TRANSACTIONS'
-const MAKE_TRANSACTIONS = 'MAKE_TRANSACTIONS'
 
 /**
  * INITIAL STATE
@@ -18,10 +18,10 @@ const defaultTransactions = {
  * ACTION CREATORS
  */
 const gotTransactions = transactions => ({type: GOT_TRANSACTIONS, transactions})
-const makeTransactions = orderDetails => ({
-  type: MAKE_TRANSACTIONS,
-  orderDetails
-})
+// const makeTransactions = orderDetails => ({
+//   type: MAKE_TRANSACTIONS,
+//   orderDetails
+// })
 
 /**
  * THUNK CREATORS
@@ -47,6 +47,9 @@ export const makeTransactionsThunk = orderDetails => async dispatch => {
       price,
       quantity
     })
+    // this will allow both portfolio and transactions view to update on purchase
+    dispatch(getPortfolioThunk())
+    dispatch(getTransactionsThunk())
   } catch (error) {
     console.log(error)
   }

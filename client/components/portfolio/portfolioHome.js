@@ -5,17 +5,19 @@ import PortfolioList from './portfolioList'
 
 const PortfolioHome = props => {
   const {stocks, portfolioValue} = props.portfolio
+  const {getPortfolio} = props
 
   useEffect(() => {
     fetchData()
 
+    // this will update the portfolio view every 5000 ms(5 seconds)
     const interval = setInterval(() => {
       console.log('getting portfolio')
-      props.getPortfolio()
-    }, 2000)
+      getPortfolio()
+    }, 5000)
 
     async function fetchData() {
-      await props.getPortfolio()
+      await getPortfolio()
     }
 
     return () => clearInterval(interval)
@@ -50,8 +52,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getPortfolio: () => dispatch(getPortfolioThunk()),
-    getPortfolioValue: symbols => dispatch()
+    getPortfolio: () => dispatch(getPortfolioThunk())
   }
 }
 
