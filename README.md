@@ -7,15 +7,13 @@ Password: Abc123!@
 
 [Heroku][stockify]
 
-[stockify]: https://stockify-stocks.herokuapp.com/portfolio
-
-## MVP
+[stockify]: https://stockify-stocks.herokuapp.com/
 
 ## Technologies
 
 * Node: JavaScript runtime environment
 
-  1.  Node was selected to build both the front-end and back-end of Firex.
+  1.  Node was selected to build both the front-end and back-end of Stockify
 
 * Express: Node library to handle HTTP requests and additional middleware
 
