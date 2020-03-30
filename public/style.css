@@ -95,16 +95,60 @@ a {
   text-decoration: none;
 }
 
+#checkout-button {
+  /* background-color: #000000; */
+  height: 30px;
+  width: 100px;
+  /* color: #FFFFFF; */
+  /* padding: 10px; */
+  border-radius: 10px;
+  /* -moz-border-radius: 10px;
+        -webkit-border-radius: 10px; */
+  margin: 16px;
+}
+
+#input-trade-quantity {
+  width: 120px;
+  height: 10px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+}
+
+#input-company-symbol {
+  width: 320px;
+  height: 10px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+  /* text-align: center; */
+}
+
+#input-quantity {
+}
+
 label {
   display: block;
 }
 
 #nav-container {
-  display: flex;
+  /* display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 100%; */
+  /* background-color: red; */
+  /* height: 10vh; */
+  /* position: fixed; */
+  display: flex;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+  align-items: center;
+  /* width: 100%; */
+  background-color: #ffffff;
+  /* z-index: 1; */
 }
 
 #nav-divier {
@@ -116,13 +160,14 @@ label {
 }
 
 #nav-menu {
+  display: flex;
   margin: 0;
   padding: 0;
   width: 80%;
-  display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-end;
+  margin-left: 90px;
 }
 
 #nav-menu-two {
@@ -133,7 +178,8 @@ label {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #4ab1ff;
+  /* background-color: #4ab1ff; */
+  background-color: red;
 }
 
 nav a {
@@ -157,10 +203,12 @@ form div {
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 7px;
   height: 50%;
   background-color: #ffffffdd;
   padding: 30px;
+  margin-left: 50px;
+  margin-right: 100px;
 }
 
 #transactions-container {
@@ -168,10 +216,11 @@ form div {
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 7px;
   height: 50%;
   background-color: #ffffffdd;
   padding: 30px;
+  margin-left: 80px;
 }
 
 .transactions-border {
@@ -179,6 +228,22 @@ form div {
   height: 2px;
   background-color: #4ab1ff;
   margin-top: 16px;
+}
+
+#trade-company-symbol {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* margin:15px -15px; */
+  border-right: 30px solid transparent;
+}
+
+#trade-form {
+  /* border-right: 120px solid transparent; */
+  /* border-right: 500px; */
+  margin-left: 100px;
 }
 
 .transactions-list-row {
@@ -216,10 +281,12 @@ form div {
   min-width: 200px;
   margin: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 7px;
   height: 50%;
   background-color: #ffffffdd;
   padding: 30px;
+  margin-left: 100px;
+  border-radius: 5px;
 }
 
 .portfolio-list-row {

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {getPortfolioThunk} from './portfolio'
+import {me} from './user'
 
 /**
  * ACTION TYPES
@@ -45,6 +46,7 @@ export const makeTransactionsThunk = orderDetails => async dispatch => {
     // this will allow both portfolio and transactions view to update on purchase
     dispatch(getPortfolioThunk())
     dispatch(getTransactionsThunk())
+    dispatch(me())
   } catch (error) {
     console.log(error)
   }
