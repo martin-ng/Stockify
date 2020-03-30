@@ -27,8 +27,6 @@ const Routes = props => {
       {/* Routes placed here are available to all visitors */}
       {!isLoggedIn && (
         <Switch>
-          <Redirect exact from="/" to="/login" />
-          <Redirect exact from="/home" to="/login" />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>
@@ -38,8 +36,6 @@ const Routes = props => {
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
           <Switch>
-            <Redirect exact from="/" to="/portfolio" />
-            <Redirect exact from="/home" to="/portfolio" />
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />
@@ -58,7 +54,6 @@ const Routes = props => {
 const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id
   }
 }
@@ -69,14 +64,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
-/**
- * PROP TYPES
- */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}

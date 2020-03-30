@@ -25,7 +25,20 @@ router.get('/', checkUser, async (req, res, next) => {
 // call made here
 router.post('/create', checkUser, async (req, res, next) => {
   try {
-    const {action, ticker, quantity} = req.body
+    let action
+    let ticker
+    let quantity
+
+    if (req.body.action === 'BUY') {
+      action = req.body.action
+      ticker = req.body.ticker
+      quantity = req.body.quantity
+    } else if (req.body.action === 'SELL') {
+      action = req.body.action
+      ticker = req.body.companySymbol
+      quantity = req.body.quantityToSell
+    }
+
     const testRequest =
       `https://sandbox.iexapis.com/stable/stock/${ticker}/quote/?token=` +
       process.env.IEX_TEST_API_KEY
@@ -41,7 +54,7 @@ router.post('/create', checkUser, async (req, res, next) => {
       userId: req.user.id
     })
 
-    const balanceOwed = +parseInt(quantity).toFixed(2) * latestPrice
+    let stockPrices = +parseInt(quantity, 10).toFixed(2) * latestPrice
 
     let user = await User.findOne({
       where: {
@@ -49,8 +62,14 @@ router.post('/create', checkUser, async (req, res, next) => {
       }
     })
 
-    let currentBalance = user.cashBalance
-    let newBalance = currentBalance - balanceOwed
+    let currentBalance = +parseInt(user.cashBalance, 10).toFixed(2)
+    let newBalance
+    if (action === 'BUY') {
+      newBalance = currentBalance - stockPrices
+    } else {
+      newBalance = currentBalance + stockPrices
+    }
+
     user.cashBalance = newBalance
     await user.save()
     res.json(transaction)

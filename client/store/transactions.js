@@ -35,14 +35,7 @@ export const getTransactionsThunk = () => async dispatch => {
 export const makeTransactionsThunk = orderDetails => async dispatch => {
   try {
     let res
-    const {action, ticker, price, quantity} = orderDetails
-
-    res = await axios.post('/api/transactions/create', {
-      action,
-      ticker,
-      price,
-      quantity
-    })
+    res = await axios.post('/api/transactions/create', orderDetails)
     // this will allow both portfolio and transactions view to update on purchase
     dispatch(getPortfolioThunk())
     dispatch(getTransactionsThunk())

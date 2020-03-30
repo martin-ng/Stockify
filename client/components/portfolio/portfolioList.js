@@ -27,9 +27,14 @@ const PortfolioList = props => {
     companySymbol
   ) => {
     let action = 'SELL'
-    let details = {sharesOwned, quantityToSell, stockPrice, companySymbol}
+    let details = {
+      action,
+      sharesOwned,
+      quantityToSell,
+      stockPrice,
+      companySymbol
+    }
     props.sellShares(details)
-    props.makeTransaction({action, companySymbol, stockPrice, quantityToSell})
   }
 
   return (
@@ -56,7 +61,7 @@ const PortfolioList = props => {
           <button
             className="sell-button"
             type="submit"
-            disabled={quantity > totalShares}
+            disabled={quantity > totalShares || quantity < 0}
             onClick={() =>
               sellStock(totalShares, quantity, latestPrice, symbol)
             }

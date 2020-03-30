@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {
   getTickersThunk,
@@ -62,7 +62,7 @@ const TradeHome = props => {
         <div>
           <div id="trade-company-symbol">
             <h2>{company.symbol}</h2>
-            {/* <div> */}
+
             <h3>{company.companyName}</h3>
           </div>
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getTransactionsThunk} from './transactions'
+import {makeTransactionsThunk} from './transactions'
 
 /**
  * ACTION TYPES
@@ -18,7 +18,6 @@ const defaultPortfolio = {
  * ACTION CREATORS
  */
 const gotPortfolio = portfolio => ({type: GOT_PORTFOLIO, portfolio})
-const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
 
 /**
  * THUNK CREATORS
@@ -54,8 +53,7 @@ export const sellUpdatePortfolioThunk = details => async dispatch => {
   let res
   try {
     res = await axios.put('/api/portfolio/sell', {details})
-    dispatch(getPortfolioThunk())
-    dispatch(getTransactionsThunk())
+    dispatch(makeTransactionsThunk(details))
   } catch (error) {
     console.log(error)
   }

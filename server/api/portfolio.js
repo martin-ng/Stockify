@@ -69,10 +69,9 @@ router.put('/sell', checkUser, async (req, res, next) => {
     let quantityToSell = +parseInt(req.body.details.quantityToSell, 10).toFixed(
       2
     )
-    let price = +parseInt(req.body.details.stockPrice, 10).toFixed(2)
+
     let symbol = req.body.details.companySymbol
 
-    let totalGained = quantityToSell * price
     const stock = await Stocks.findOne({
       where: {
         symbol,
@@ -80,30 +79,13 @@ router.put('/sell', checkUser, async (req, res, next) => {
       }
     })
 
-    const user = await User.findOne({
-      where: {
-        id: req.user.id
-      }
-    })
-    console.log('shares owned: ', sharesOwned)
-    console.log('to sell: ', quantityToSell)
-    console.log('totalGained: ', totalGained)
-    console.log('before gained: ', user.cashBalance)
-    user.cashBalance =
-      +parseInt(user.cashBalance, 10).toFixed(2) +
-      +parseInt(totalGained, 10).toFixed(2)
-    console.log('after gained: ', user.cashBalance)
-    await user.save()
-
     if (sharesOwned === quantityToSell) {
       stock.destroy()
     } else {
       stock.totalShares = stock.totalShares - quantityToSell
       await stock.save()
     }
-    console.log('user all end: ', user.cashBalance)
     res.sendStatus(200)
-    // res.json(user)
   } catch (error) {
     next(error)
   }
