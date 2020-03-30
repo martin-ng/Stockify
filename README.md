@@ -1,8 +1,9 @@
 # Stockify
 
-Stockify is a mock stock portfolio management web application. Feel free to use the following login or create an account to test the app.
+Stockify is a mock stock portfolio management web application. Users can practice trading stocks with a platform that updates prices in real-time.
+Please visit the following link and login using the supplied account. Feel free to create your own account as well.
 
-Login: testuser123@email.com
+Login: testuser@email.com
 Password: Abc123!@
 
 [Heroku][stockify]
