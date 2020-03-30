@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getTransactionsThunk} from '../../store'
 import TransactionsList from './transactionsList'
@@ -14,17 +13,24 @@ const TransactionsHome = props => {
   return (
     <div id="transactions-container">
       <div>
-        <h1>Your Transaction's History</h1>
+        <h2>Your Transaction's History</h2>
       </div>
 
       {transactions.length ? (
-        transactions.map(transaction => {
-          return (
-            <TransactionsList key={transaction.id} transaction={transaction} />
-          )
-        })
+        // prints the transaction history from newest to least recent
+        transactions
+          .slice(0)
+          .reverse()
+          .map(transaction => {
+            return (
+              <TransactionsList
+                key={transaction.id}
+                transaction={transaction}
+              />
+            )
+          })
       ) : (
-        <h3>YOU DO NOT HAVE A TRANSACTION'S HISTORY</h3>
+        <h3>You do not have a transaction history</h3>
       )}
     </div>
   )

@@ -183,7 +183,14 @@ a {
   /* text-align: center; */
 }
 
-#input-quantity {
+#input-sell-quantity {
+  width: 50px;
+  height: 5px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+  text-align: right;
 }
 
 .glow-buttons:hover {
@@ -372,8 +379,7 @@ form div {
   height: 50%;
   background-color: #ffffffdd;
   padding: 30px;
-  margin-left: 100px;
-  border-radius: 5px;
+  margin-left: 80px;
 }
 
 .portfolio-list-row {
@@ -388,6 +394,13 @@ small {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 14px;
+}
+
+.sell-button {
+  height: 25px;
+  width: 80px;
+  border-radius: 5px;
+  margin: 16px;
 }
 
 #top-level-container {

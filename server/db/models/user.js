@@ -27,7 +27,7 @@ const User = db.define('user', {
         msg: 'Please enter a first name!'
       },
       is: {
-        args: /^(?=[a-zA-Z]).{4,}$/,
+        args: /^(?=[a-zA-Z]).{3,}$/,
         msg:
           'First name must contain only characters and a minimum of 4 characters '
       }
@@ -43,7 +43,7 @@ const User = db.define('user', {
         msg: 'Please enter a last name!'
       },
       is: {
-        args: /^([a-zA-Z]).{2,}$/,
+        args: /^([a-zA-Z]).{1,}$/,
         msg:
           'Last name must contain only characters and a minimum of 2 characters '
       }
