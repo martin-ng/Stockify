@@ -26,7 +26,7 @@ const PortfolioHome = props => {
   return (
     <div id="portfolio-container">
       <div>
-        <h1>Your Portfolio ${+portfolioValue.toFixed(2)}</h1>
+        <h1>Your Portfolio: ${+portfolioValue.toFixed(2)}</h1>
       </div>
 
       {stocks.length ? (

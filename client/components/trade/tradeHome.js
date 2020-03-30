@@ -11,25 +11,28 @@ import {
 const TradeHome = props => {
   const [ticker, setTicker] = useState('')
   const [quantity, setQuantity] = useState(0)
-  // const [count, setCount] = useState(0)
-  const [errorMsg, setError] = useState('')
+  const [errorMsgNumber, setErrorNumber] = useState('')
 
-  const {
-    user,
-    getUser,
-    getTicker,
-    company,
-    makeOrder,
-    increasePortfolio
-  } = props
-  const {companyName, open} = props.company
+  const {user, getTicker, company, makeOrder, increasePortfolio} = props
 
-  useEffect(
-    () => {
-      getUser()
-    },
-    [ticker, quantity]
-  )
+  const {companyName, open, latestPrice} = props.company
+
+  // useEffect(() => {
+
+  // const interval = setInterval(() => {
+  //   getTicker(ticker)
+  // }, 3000)
+  // if (company.symbol) {
+  //   return () => clearInterval(interval)
+  // }
+  // }, [])
+
+  // useEffect(
+  //   () => {
+  //     getUser()
+  //   },
+  //   [ticker, quantity, errorMsgNumber]
+  // )
 
   const calculateTotal = (shares, price) => {
     let total = +(shares * price).toFixed(2)
@@ -37,6 +40,11 @@ const TradeHome = props => {
   }
 
   const totalCost = calculateTotal(quantity, company.latestPrice)
+
+  const resetState = () => {
+    setTicker('')
+    setQuantity('')
+  }
 
   const onClickHandler = action => {
     let details = {
@@ -48,22 +56,20 @@ const TradeHome = props => {
       open
     }
 
-    if (quantity > 0 && user.cashBalance >= totalCost) {
-      makeOrder(details)
-      increasePortfolio(details)
-    } else if (quantity <= 0) {
-      console.log('please put a number higher than 0')
-    } else if (user.cashBalance >= totalCost) {
-      console.log('You do not have enough money!')
-    }
+    makeOrder(details)
+    increasePortfolio(details)
+    resetState()
   }
-  console.log('balance', props)
+
   return (
     <div id="trade-container">
       <h1>Cash Balance: ${user.cashBalance}</h1>
+
       <input
+        id="input-company-symbol"
         type="text"
         placeholder="Search Company Ticker"
+        value={ticker}
         name="symbol"
         onChange={event => {
           if (event.target.value !== '') {
@@ -74,47 +80,50 @@ const TradeHome = props => {
       />
       {company.symbol ? (
         <div>
-          <h1>{company.symbol}</h1>
+          <div id="trade-company-symbol">
+            <h1>{company.symbol}</h1>
+            {/* <div> */}
+            <h3>{company.companyName}</h3>
+          </div>
+
+          <p>Price: ${latestPrice.toFixed(2)}</p>
+
+          <p>
+            {+totalCost.toFixed(2) > user.cashBalance
+              ? 'You do not have enough money'
+              : 'Total: $' + totalCost.toFixed(2)}
+          </p>
+
+          <input
+            type="text"
+            id="input-trade-quantity"
+            name="symbol quantity"
+            value={quantity}
+            onChange={event => {
+              const regex = /^\d+$/
+              if (event.target.value === '' || regex.test(event.target.value)) {
+                setErrorNumber('')
+                setQuantity(event.target.value)
+              } else {
+                setErrorNumber('Please input a valid number!')
+              }
+            }}
+          />
           <div>
-            <h2>{company.companyName}</h2>
-            <p>Price: ${company.latestPrice}</p>
-
-            <p>
-              Total:
-              {+totalCost.toFixed(2) > user.cashBalance
-                ? 'You do not have enough money'
-                : '$' + totalCost.toFixed(2)}
-            </p>
-
-            <input
-              type="text"
-              id="quantity-field"
-              name="symbol quantity"
-              value={quantity}
-              onChange={event => {
-                const regex = /^\d+$/
-                if (
-                  event.target.value === '' ||
-                  regex.test(event.target.value)
-                ) {
-                  setQuantity(event.target.value)
-                } else {
-                  setError('Please input a number!')
-                }
-              }}
-            />
             <button
+              id="checkout-button"
               type="reset"
               defaultValue="Reset"
-              disabled={quantity <= 0 || totalCost < 0}
+              disabled={quantity <= 0 || totalCost > user.cashBalance}
               onClick={() => onClickHandler('BUY')}
             >
               Checkout
             </button>
-            <div>{errorMsg.length ? <p>{errorMsg}</p> : <br />}</div>
           </div>
+          <div>{errorMsgNumber.length ? <p>{errorMsgNumber}</p> : <br />}</div>
         </div>
       ) : (
+        // </div>
         <div />
       )}
     </div>
