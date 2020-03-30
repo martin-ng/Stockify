@@ -45,6 +45,7 @@ const PortfolioList = props => {
         </div>
         <div>
           <input
+            id="input-sell-quantity"
             type="number"
             name="symbol quantity"
             placeholder={quantity}
@@ -53,6 +54,7 @@ const PortfolioList = props => {
             }}
           />
           <button
+            className="sell-button"
             type="submit"
             disabled={quantity > totalShares}
             onClick={() =>
