@@ -2,8 +2,8 @@ const {expect} = require('chai')
 const db = require('../../server/db/index')
 const Transactions = db.model('transactions')
 const User = db.model('user')
-// const Stocks = db.model('stocks')
 
+// Transactions tests written with Mocha and Chai to validate validity of models
 xdescribe('Transactions model', () => {
   beforeEach(() => {
     return db.sync({force: true})

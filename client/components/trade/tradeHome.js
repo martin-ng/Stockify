@@ -63,7 +63,7 @@ const TradeHome = props => {
 
   return (
     <div id="trade-container">
-      <h1>Cash Balance: ${user.cashBalance}</h1>
+      <h2>Cash Balance: ${user.cashBalance}</h2>
 
       <input
         id="input-company-symbol"
