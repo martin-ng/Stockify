@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getTransactionsThunk} from './transactions'
 
 /**
  * ACTION TYPES
@@ -17,7 +18,7 @@ const defaultPortfolio = {
  * ACTION CREATORS
  */
 const gotPortfolio = portfolio => ({type: GOT_PORTFOLIO, portfolio})
-// const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
+const updatePortfolioValue = portfolio => ({type: UPDATE_VALUE, portfolio})
 
 /**
  * THUNK CREATORS
@@ -32,7 +33,7 @@ export const getPortfolioThunk = () => async dispatch => {
   }
 }
 
-export const buyUpdatePortfolio = details => async dispatch => {
+export const buyUpdatePortfolioThunk = details => async dispatch => {
   let res
   try {
     const {ticker, quantity, companyName, open} = details
@@ -47,10 +48,14 @@ export const buyUpdatePortfolio = details => async dispatch => {
   }
 }
 
+// let quantityToInt = +parseInt(quantityToSell, 10).toFixed(2)
+
 export const sellUpdatePortfolioThunk = details => async dispatch => {
   let res
   try {
     res = await axios.put('/api/portfolio/sell', {details})
+    dispatch(getPortfolioThunk())
+    dispatch(getTransactionsThunk())
   } catch (error) {
     console.log(error)
   }
@@ -71,6 +76,7 @@ export const updatePortfolioValueThunk = () => async dispatch => {
 export default function(state = defaultPortfolio, action) {
   switch (action.type) {
     case GOT_PORTFOLIO:
+      // eslint-disable-next-line no-case-declarations
       let portfolioValue = 0
 
       action.portfolio.forEach(stock => {

@@ -23,10 +23,9 @@ router.get('/', checkUser, async (req, res, next) => {
       const {data} = await axios.get(testRequest)
 
       stock.dataValues.openingPrice =
-        data.open === null ? stock.dataValues.openingPrice : data.open
+        data.open === 0 || null ? stock.dataValues.openingPrice : data.open
       stock.dataValues.latestPrice = data.latestPrice
     }
-
     if (!portfolio) res.sendStatus(404)
     else res.json(portfolio)
   } catch (error) {
@@ -38,9 +37,8 @@ router.put('/buy', checkUser, async (req, res, next) => {
   try {
     const {ticker, quantity, companyName, open} = req.body
     let symbol = ticker.toUpperCase()
-    let amount = +parseInt(quantity).toFixed(2)
-    let openPrice = +parseInt(open).toFixed(2)
-    // let balanceOwed = amount *
+    let amount = +parseInt(quantity, 10).toFixed(2)
+    let openPrice = +parseInt(open, 10).toFixed(2)
 
     const stock = await Stocks.findOne({
       where: {symbol, userId: req.user.id}
@@ -87,16 +85,23 @@ router.put('/sell', checkUser, async (req, res, next) => {
         id: req.user.id
       }
     })
-    user.cashBalance = +parseInt(user.cashBalance, 10).toFixed(2) + totalGained
-    user.save()
+    console.log('shares owned: ', sharesOwned)
+    console.log('to sell: ', quantityToSell)
+    console.log('totalGained: ', totalGained)
+    console.log('before gained: ', user.cashBalance)
+    user.cashBalance =
+      +parseInt(user.cashBalance, 10).toFixed(2) +
+      +parseInt(totalGained, 10).toFixed(2)
+    console.log('after gained: ', user.cashBalance)
+    await user.save()
 
     if (sharesOwned === quantityToSell) {
       stock.destroy()
-      stock.save()
     } else {
       stock.totalShares = stock.totalShares - quantityToSell
-      stock.save()
+      await stock.save()
     }
+    console.log('user all end: ', user.cashBalance)
     res.sendStatus(200)
     // res.json(user)
   } catch (error) {

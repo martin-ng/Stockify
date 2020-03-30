@@ -12,14 +12,14 @@ const PortfolioList = props => {
   } = props.stock
 
   const [quantity, setQuantity] = useState(0)
-  console.log('quantity: ', quantity)
   const totalValue = +(totalShares * latestPrice).toFixed(2)
   const difference = +(latestPrice - openingPrice).toFixed(2)
+
   const stockColor = value => {
     if (value === 0) return 'grey'
     return value > 0 ? 'green' : 'red'
   }
-  // const {action, ticker, price, quantity} = orderDetails
+
   const sellStock = (
     sharesOwned,
     quantityToSell,

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getPortfolioThunk} from '../../store'
 import PortfolioList from './portfolioList'
@@ -22,7 +22,6 @@ const PortfolioHome = props => {
 
     return () => clearInterval(interval)
   }, [])
-  console.log('PORTFOLIO: ', props)
 
   return (
     <div id="portfolio-container">

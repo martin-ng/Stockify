@@ -2,9 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {
   getTickersThunk,
-  getTransactionsThunk,
   makeTransactionsThunk,
-  buyUpdatePortfolio,
+  buyUpdatePortfolioThunk,
   me
 } from '../../store'
 
@@ -17,23 +16,6 @@ const TradeHome = props => {
 
   const {companyName, open, latestPrice} = props.company
 
-  // useEffect(() => {
-
-  // const interval = setInterval(() => {
-  //   getTicker(ticker)
-  // }, 3000)
-  // if (company.symbol) {
-  //   return () => clearInterval(interval)
-  // }
-  // }, [])
-
-  // useEffect(
-  //   () => {
-  //     getUser()
-  //   },
-  //   [ticker, quantity, errorMsgNumber]
-  // )
-
   const calculateTotal = (shares, price) => {
     let total = +(shares * price).toFixed(2)
     return total
@@ -42,7 +24,6 @@ const TradeHome = props => {
   const totalCost = calculateTotal(quantity, company.latestPrice)
 
   const resetState = () => {
-    setTicker('')
     setQuantity('')
   }
 
@@ -55,7 +36,6 @@ const TradeHome = props => {
       companyName,
       open
     }
-
     makeOrder(details)
     increasePortfolio(details)
     resetState()
@@ -81,7 +61,7 @@ const TradeHome = props => {
       {company.symbol ? (
         <div>
           <div id="trade-company-symbol">
-            <h1>{company.symbol}</h1>
+            <h2>{company.symbol}</h2>
             {/* <div> */}
             <h3>{company.companyName}</h3>
           </div>
@@ -123,7 +103,6 @@ const TradeHome = props => {
           <div>{errorMsgNumber.length ? <p>{errorMsgNumber}</p> : <br />}</div>
         </div>
       ) : (
-        // </div>
         <div />
       )}
     </div>
@@ -136,6 +115,7 @@ const TradeHome = props => {
 const mapState = state => {
   return {
     company: state.tickers.company,
+    portfolio: state.portfolio,
     user: state.user,
     isLoggedIn: !!state.user.id
   }
@@ -146,7 +126,7 @@ const mapDispatch = dispatch => {
     getTicker: ticker => dispatch(getTickersThunk(ticker)),
     makeOrder: orderDetails => dispatch(makeTransactionsThunk(orderDetails)),
     increasePortfolio: orderDetails =>
-      dispatch(buyUpdatePortfolio(orderDetails)),
+      dispatch(buyUpdatePortfolioThunk(orderDetails)),
     getUser: () => dispatch(me())
   }
 }

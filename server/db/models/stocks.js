@@ -14,7 +14,6 @@ const Stocks = db.define('stocks', {
 
   openingPrice: {
     type: Sequelize.DECIMAL(12, 2),
-    allowNull: false,
     min: 0
   },
 
