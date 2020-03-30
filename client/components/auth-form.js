@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import {auth, signup, login} from '../store'
+import {signup, login} from '../store'
 
 /**
  * COMPONENT
@@ -23,26 +22,28 @@ const AuthForm = props => {
         <form id="auth-form" onSubmit={handleSubmitSignUp} name={name}>
           <div id="auth-type">{displayName}</div>
 
-          <small>First Name</small>
+          <small className="required-field">First Name</small>
           <input className="auth-input" name="firstName" type="text" />
 
-          <small>Last Name</small>
+          <small className="required-field">Last Name</small>
           <input className="auth-input" name="lastName" type="text" />
 
-          <small>Email</small>
+          <small className="required-field">Email</small>
           <input className="auth-input" name="signUpEmail" type="email" />
 
-          <small>Password</small>
+          <small className="required-field">Password</small>
           <input className="auth-input" name="firstPassword" type="password" />
 
-          <button id="auth-button-container" type="submit">
-            Create your account
-          </button>
+          <div className="auth-button-div">
+            <button id="auth-button-signup" type="submit">
+              Create your account
+            </button>
+          </div>
 
           <h4 id="link-p">
             Already have an account?
             <Link className="link-question" to="/login">
-              Login
+              {` `}Login
             </Link>
           </h4>
 
@@ -63,16 +64,20 @@ const AuthForm = props => {
               type="password"
             />
 
-            <button id="auth-button-container" type="submit">
-              Continue
-            </button>
+            <div className="auth-button-div">
+              <button id="auth-button-login" type="submit">
+                Continue
+              </button>
+            </div>
 
             <h4 id="link-p">
               Don't have an account?
               <Link className="link-question" to="/signup">
-                Signup
+                {`  `}Signup
               </Link>
             </h4>
+
+            {error && error.response && <div> {error.response.data} </div>}
           </form>
         </div>
       )}

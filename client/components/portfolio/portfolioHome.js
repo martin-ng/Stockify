@@ -22,11 +22,12 @@ const PortfolioHome = props => {
 
     return () => clearInterval(interval)
   }, [])
+  console.log('PORTFOLIO: ', props)
 
   return (
     <div id="portfolio-container">
       <div>
-        <h1>Your Portfolio: ${+portfolioValue.toFixed(2)}</h1>
+        <h2>Your Portfolio: ${+portfolioValue.toFixed(2)}</h2>
       </div>
 
       {stocks.length ? (
@@ -45,6 +46,7 @@ const PortfolioHome = props => {
  */
 const mapState = state => {
   return {
+    user: state.user,
     portfolio: state.portfolio,
     isLoggedIn: !!state.user.id
   }

@@ -7,155 +7,160 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({
-      id: 1,
-      email: 'cody@email.com',
-      firstName: 'cody',
-      lastName: 'pug',
-      password: 'Abc123!@'
-    }),
+  // Mock data was commented out as 'unique' constraint in sequelize produces an error when signing up
 
-    User.create({
-      id: 2,
-      email: 'richestman@email.com',
-      firstName: 'richie',
-      lastName: 'rich',
-      password: 'abcsD123!@#'
-    }),
+  // const users = await Promise.all([
+  //   User.create({
+  //     id: 1,
+  //     email: 'cody@email.com',
+  //     firstName: 'cody',
+  //     lastName: 'pug',
+  //     password: 'Abc123!@'
+  //   }),
 
-    User.create({
-      id: 3,
-      email: 'poorestman@email.com',
-      firstName: 'notrichie',
-      lastName: 'notrich',
-      password: 'ABc123!@#'
-    }),
+  //   User.create({
+  //     id: 2,
+  //     email: 'richestman@email.com',
+  //     firstName: 'richie',
+  //     lastName: 'rich',
+  //     password: 'abcsD123!@#'
+  //   }),
 
-    User.create({
-      id: 4,
-      email: 'middleman@email.com',
-      firstName: 'middle',
-      lastName: 'class',
-      password: 'Abc123!@#'
-    }),
+  //   User.create({
+  //     id: 3,
+  //     email: 'poorestman@email.com',
+  //     firstName: 'notrichie',
+  //     lastName: 'notrich',
+  //     password: 'ABc123!@#'
+  //   }),
 
-    User.create({
-      id: 5,
-      email: 'testuser@email.com',
-      firstName: 'testuser',
-      lastName: 'testuser',
-      password: 'Abc123!@'
-    })
-  ])
+  //   User.create({
+  //     id: 4,
+  //     email: 'middleman@email.com',
+  //     firstName: 'middle',
+  //     lastName: 'class',
+  //     password: 'Abc123!@#'
+  //   }),
 
-  const stocks = await Promise.all([
-    Stocks.create({
-      symbol: 'tsla',
-      companyName: 'Tesla',
-      totalShares: 500,
-      userId: 2,
-      openingPrice: 503
-    }),
+  //   User.create({
+  //     id: 5,
+  //     email: 'testuser@email.com',
+  //     firstName: 'testuser',
+  //     lastName: 'testuser',
+  //     password: 'Abc123!@'
+  //   })
+  // ])
 
-    Stocks.create({
-      symbol: 'amz',
-      companyName: 'Amazon',
-      totalShares: 1000,
-      userId: 2,
-      openingPrice: 200
-    }),
+  // const stocks = await Promise.all([
+  //   Stocks.create({
+  //     symbol: 'tsla',
+  //     companyName: 'Tesla',
+  //     totalShares: 500,
+  //     userId: 2,
+  //     openingPrice: 503
+  //   }),
 
-    Stocks.create({
-      symbol: 'msft',
-      companyName: 'Microsoft',
-      totalShares: 15,
-      userId: 1,
-      openingPrice: 100
-    }),
+  //   Stocks.create({
+  //     symbol: 'amz',
+  //     companyName: 'Amazon',
+  //     totalShares: 1000,
+  //     userId: 2,
+  //     openingPrice: 200
+  //   }),
 
-    Stocks.create({
-      symbol: 'awk',
-      companyName: 'American Water Works',
-      totalShares: 10,
-      userId: 1,
-      openingPrice: 74
-    }),
+  //   Stocks.create({
+  //     symbol: 'msft',
+  //     companyName: 'Microsoft',
+  //     totalShares: 15,
+  //     userId: 1,
+  //     openingPrice: 100
+  //   }),
 
-    Stocks.create({
-      symbol: 'goog',
-      companyName: 'Alphabet',
-      totalShares: 100,
-      userId: 2,
-      openingPrice: 1200
-    }),
+  //   Stocks.create({
+  //     symbol: 'awk',
+  //     companyName: 'American Water Works',
+  //     totalShares: 10,
+  //     userId: 1,
+  //     openingPrice: 74
+  //   }),
 
-    Stocks.create({
-      symbol: 'WTM',
-      companyName: 'White Mountains Insurance Group',
-      totalShares: 5,
-      userId: 2,
-      openingPrice: 1300
-    }),
+  //   Stocks.create({
+  //     symbol: 'goog',
+  //     companyName: 'Alphabet',
+  //     totalShares: 100,
+  //     userId: 2,
+  //     openingPrice: 1200
+  //   }),
 
-    Stocks.create({
-      symbol: 'BRK.A',
-      companyName: 'Berkshire Hathaway',
-      totalShares: 1,
-      userId: 2,
-      openingPrice: 1100
-    }),
+  //   Stocks.create({
+  //     symbol: 'WTM',
+  //     companyName: 'White Mountains Insurance Group',
+  //     totalShares: 5,
+  //     userId: 2,
+  //     openingPrice: 1300
+  //   }),
 
-    Stocks.create({
-      symbol: 'ANGI',
-      companyName: 'Angi Homeservices',
-      totalShares: 5,
-      userId: 4,
-      openingPrice: 10
-    })
-  ])
+  //   Stocks.create({
+  //     symbol: 'BRK.A',
+  //     companyName: 'Berkshire Hathaway',
+  //     totalShares: 1,
+  //     userId: 2,
+  //     openingPrice: 1100
+  //   }),
 
-  const transactions = await Promise.all([
-    Transactions.create({
-      action: 'BUY',
-      symbol: 'TSLA',
-      priceAtPurchase: 400,
-      totalShares: 10,
-      userId: 1
-    }),
+  //   Stocks.create({
+  //     symbol: 'ANGI',
+  //     companyName: 'Angi Homeservices',
+  //     totalShares: 5,
+  //     userId: 4,
+  //     openingPrice: 10
+  //   })
+  // ])
 
-    Transactions.create({
-      action: 'BUY',
-      symbol: 'TSLA',
-      priceAtPurchase: 100,
-      totalShares: 10,
-      userId: 1
-    }),
+  // const transactions = await Promise.all([
+  //   Transactions.create({
+  //     action: 'BUY',
+  //     symbol: 'TSLA',
+  //     priceAtPurchase: 400,
+  //     totalShares: 10,
+  //     userId: 1
+  //   }),
 
-    Transactions.create({
-      action: 'BUY',
-      symbol: 'TSLA',
-      priceAtPurchase: 250,
-      totalShares: 10,
-      userId: 1
-    }),
+  //   Transactions.create({
+  //     action: 'BUY',
+  //     symbol: 'TSLA',
+  //     priceAtPurchase: 100,
+  //     totalShares: 10,
+  //     userId: 1
+  //   }),
 
-    Transactions.create({
-      action: 'BUY',
-      symbol: 'TSLA',
-      priceAtPurchase: 300,
-      totalShares: 50,
-      userId: 1
-    }),
+  //   Transactions.create({
+  //     action: 'BUY',
+  //     symbol: 'TSLA',
+  //     priceAtPurchase: 250,
+  //     totalShares: 10,
+  //     userId: 1
+  //   }),
 
-    Transactions.create({
-      action: 'SELL',
-      symbol: 'TSLA',
-      priceAtPurchase: 200,
-      totalShares: 10,
-      userId: 1
-    })
-  ])
+  //   Transactions.create({
+  //     action: 'BUY',
+  //     symbol: 'TSLA',
+  //     priceAtPurchase: 300,
+  //     totalShares: 50,
+  //     userId: 1
+  //   }),
+
+  //   Transactions.create({
+  //     action: 'SELL',
+  //     symbol: 'TSLA',
+  //     priceAtPurchase: 200,
+  //     totalShares: 10,
+  //     userId: 1
+  //   })
+  // ])
+  const users = []
+  const transactions = []
+  const stocks = []
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${stocks.length} stocks`)

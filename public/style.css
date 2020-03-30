@@ -4,6 +4,81 @@
   align-items: center;
   width: 100%;
   padding: 40px;
+  justify-content: space-between;
+}
+
+#auth-button-signup {
+  font-size: 16px;
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+  margin-left: 55px;
+  margin-right: 5px;
+}
+
+#auth-button-login {
+  font-size: 16px;
+  height: 30px;
+  width: 150px;
+  border-radius: 10px;
+  margin-left: 80px;
+  margin-right: 50px;
+}
+
+.auth-button-div {
+  padding-top: 10px;
+}
+
+#auth-form {
+  width: 100%;
+  width: 350px;
+  min-width: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: left;
+  justify-content: space-between;
+  padding: 40px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background: var(--off-white-opaque);
+}
+
+#auth-type {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#input-trade-quantity {
+  width: 120px;
+  height: 10px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+}
+
+#input-company-symbol {
+  width: 320px;
+  height: 10px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
+  /* text-align: center; */
+}
+
+.auth-input {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  width: 325px;
+  height: 10px;
+  padding: 10px;
+  margin-right: 100x;
+  border-radius: 5px;
+  border: 1px solid #4ab1ff;
 }
 
 .auth {
@@ -74,19 +149,6 @@
   justify-content: flex-start;
 }
 
-#auth-form {
-  width: 40%;
-  min-width: 400px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: left;
-  justify-content: space-between;
-  padding: 40px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  background: var(--off-white-opaque);
-}
-
 body {
   font-family: sans-serif;
 }
@@ -96,14 +158,9 @@ a {
 }
 
 #checkout-button {
-  /* background-color: #000000; */
   height: 30px;
   width: 100px;
-  /* color: #FFFFFF; */
-  /* padding: 10px; */
   border-radius: 10px;
-  /* -moz-border-radius: 10px;
-        -webkit-border-radius: 10px; */
   margin: 16px;
 }
 
@@ -129,34 +186,59 @@ a {
 #input-quantity {
 }
 
+.glow-buttons:hover {
+  /* color: rgba(255, 255, 255, 1); */
+  /* box-shadow: 0 5px 15px #4ab1ff; */
+  background: #4ab1ff;
+  color: white;
+  opacity: 0.5;
+}
+
 label {
   display: block;
 }
 
-#nav-container {
-  /* display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%; */
-  /* background-color: red; */
-  /* height: 10vh; */
-  /* position: fixed; */
-  display: flex;
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  align-items: center;
-  /* width: 100%; */
-  background-color: #ffffff;
-  /* z-index: 1; */
+.link-buttons {
+  /* font: bold 11px Arial; */
+  /* text-decoration: none; */
+  /* background-color: #EEEEEE; */
+  color: #4ab1ff;
+  font-size: 26px;
+  /* padding: 2px 6px 2px 6px; */
+  border-top: 1px #bababa;
+  border-right: 1px #bababa;
+  border-bottom: 1px #bababa;
+  border-left: 1px #bababa;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+
+  transition: 0.5s;
+
+  padding: 5px;
+  border-radius: 5px;
 }
 
-#nav-divier {
-  margin: 0px;
-  width: 90%;
+.active-link-buttons {
+  background: #4ab1ff;
+  color: white;
+  opacity: 0.5;
+}
+
+#nav-container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  margin-left: 40px;
+}
+
+#nav-divider {
+  width: 100%;
   align-self: center;
-  height: 10px;
-  background-color: black;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  background-color: #4ab1ff;
 }
 
 #nav-menu {
@@ -167,7 +249,7 @@ label {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 90px;
+  margin-left: 120px;
 }
 
 #nav-menu-two {
@@ -196,6 +278,11 @@ form div {
   display: flex;
   flex-direction: row;
   /* height: 100vh; */
+}
+
+.required-field::after {
+  content: '*';
+  color: red;
 }
 
 #trade-container {
@@ -295,4 +382,24 @@ form div {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+small {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+#top-level-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#welcome-message {
+  display: flex;
+  align-items: center;
+  padding-left: 42px;
+  padding-top: 25px;
+  padding-bottom: 30px;
 }

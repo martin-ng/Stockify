@@ -3,7 +3,8 @@ const db = require('../../server/db/index')
 const Stocks = db.model('stocks')
 const User = db.model('user')
 
-xdescribe('Stocks', () => {
+//Stock tests written with Mocha and Chao to validate models
+describe('Stocks', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -13,7 +14,8 @@ xdescribe('Stocks', () => {
       const stock = await Stocks.create({
         symbol: 'tsla',
         companyName: 'Tesla',
-        totalShares: 5000
+        totalShares: 5000,
+        openingPrice: 200
       })
 
       expect(stock.dataValues.symbol).to.be.equal('TSLA')
@@ -57,39 +59,45 @@ xdescribe('Stocks', () => {
         symbol: 'tsla',
         companyName: 'Tesla',
         totalShares: 500,
-        userId: 1
+        userId: 1,
+        openingPrice: 200
       })
 
       stock2 = await Stocks.create({
         symbol: 'msft',
         companyName: 'Microsoft',
         totalShares: 250,
-        userId: 2
+        userId: 2,
+        openingPrice: 300
       })
 
       stock3 = await Stocks.create({
         symbol: 'awk',
         companyName: 'awkward',
         totalShares: 10,
-        userId: 3
+        userId: 3,
+        openingPrice: 200
       })
 
       stock4 = await Stocks.create({
         symbol: 'awk',
         companyName: 'awkward',
         totalShares: 20,
-        userId: 2
+        userId: 2,
+        openingPrice: 150
       })
     })
 
     describe('Class methods ', () => {
       describe('getPortfolio', () => {
         it('returns user ones`s portfolio', async () => {
+          console.log('user 1: ', user1)
           const id = user1.dataValues.id
           const portfolio = await Stocks.getPortfolio(id)
           expect(portfolio.length).to.be.equal(1)
           expect(portfolio[0].symbol).to.be.equal('TSLA')
           expect(portfolio[0].companyName).to.be.equal('Tesla')
+          expect(portfolio[0].openingPrice).to.be.equal(200.0)
         })
 
         it('returns user two`s portfolio', async () => {
@@ -98,6 +106,7 @@ xdescribe('Stocks', () => {
           expect(portfolio.length).to.be.equal(2)
           expect(portfolio[0].symbol).to.be.equal('MSFT')
           expect(portfolio[1].companyName).to.be.equal('Awkward')
+          expect(portfolio[1].openingPrice).to.be.equal(150.0)
         })
 
         it('returns user three`s portfolio', async () => {
@@ -106,6 +115,7 @@ xdescribe('Stocks', () => {
           expect(portfolio.length).to.be.equal(1)
           expect(portfolio[0].symbol).to.be.equal('AWK')
           expect(portfolio[0].companyName).to.be.equal('Awkward')
+          expect(portfolio[0].openingPrice).to.be.equal(150.0)
         })
       }) // end of getPortfolio method tests
     })

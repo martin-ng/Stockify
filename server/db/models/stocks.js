@@ -31,19 +31,15 @@ Stocks.beforeCreate(stock => {
     stock.companyName[0].toUpperCase() + stock.companyName.slice(1)
 })
 
-// Stocks.getPortfolio = function(userId) {
-//   const stocks = Stocks.findAll({
-//     where: {
-//       userId
-//     }
-//   })
-//   console.log("inside : ", stocks)
-//   let portfolio = stocks.map(stock => stock.dataValues)
-//   return portfolio
-// }
-
-// Stocks.updateTotal = async function(transaction) {
-//   const stocks =
-// }
+Stocks.getPortfolio = function(userId) {
+  const stocks = Stocks.findAll({
+    where: {
+      userId
+    }
+  })
+  console.log('inside : ', stocks)
+  let portfolio = stocks.map(stock => stock.dataValues)
+  return portfolio
+}
 
 module.exports = Stocks

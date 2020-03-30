@@ -4,6 +4,7 @@ const {expect} = require('chai')
 const db = require('../../server/db/index')
 const User = db.model('user')
 
+// User tests written with Mocha and Chai to help validate models
 xdescribe('User model', () => {
   beforeEach(() => {
     return db.sync({force: true})
