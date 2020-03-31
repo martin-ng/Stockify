@@ -12,6 +12,7 @@ import {
 } from './components'
 
 import {me} from './store'
+import portfolioHome from './components/portfolio/portfolioHome'
 
 const Routes = props => {
   useEffect(
@@ -27,6 +28,7 @@ const Routes = props => {
       {/* Routes placed here are available to all visitors */}
       {!isLoggedIn && (
         <Switch>
+          <Route path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>
@@ -36,6 +38,7 @@ const Routes = props => {
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
           <Switch>
+            <Route path="/" component={PortfolioHome} />
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />
