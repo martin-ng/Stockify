@@ -81,6 +81,12 @@ https://stockify-stocks.herokuapp.com/
     DOM. Manipulating the DOM is very expensive, whereas the virtual DOM only makes changes to specific parts of the DOM. Redux complements React by storing global
     state in a central location. This facilitates passing data to deeply nested components effectively by-passing React's uni-directional data flow.
 
+## Images
+
+[Signup](./assets/Signup.JPG)
+[Portfolio](./assets/Portfolio.JPG)
+[Transactions](./assets/Transactions.JPG)
+
 ## Future Updates
 
 1.  Implement a system to retrieve news regarding stock data.
