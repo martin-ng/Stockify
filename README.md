@@ -83,9 +83,9 @@ https://stockify-stocks.herokuapp.com/
 
 ## Images
 
-[Signup](./assets/Signup.JPG)
-[Portfolio](./assets/Portfolio.JPG)
-[Transactions](./assets/Transactions.JPG)
+![Signup](./assets/Signup.JPG)
+![Portfolio](./assets/Portfolio.JPG)
+![Transactions](./assets/Transactions.JPG)
 
 ## Future Updates
 
