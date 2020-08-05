@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Stockify is a web application where users can exercise trading stocks.
+Stockify is a web application where users can exercise trading stocks without financial risks.
 Users can register with a unique email, purchase/sell stocks, and audit their transactions history.
 This web app is meant to simulate trading stocks without financial risks.
 
@@ -42,10 +42,9 @@ https://stockify-stocks.herokuapp.com/
 
 ## Technologies
 
-* Node: JavaScript run-time environment. Node's asynchronous, non-blocking, and single-threaded nature allows requests to be processed without blocking
-  the thread. In addition to Node's clustering module, this makes Node-based web applications highly scalable.
+* Node: JavaScript runtime environment
 
-* Express: Framework built on top of Node to create RESTful APIs and additional middleware.
+* Express: Node library to handle HTTP requests and additional middleware.
 
 * React: JavaScript library to keep the UI and state in sync through its virtual DOM.
 
