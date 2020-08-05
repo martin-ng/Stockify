@@ -42,9 +42,9 @@ https://stockify-stocks.herokuapp.com/
 
 ## Technologies
 
-* Node: JavaScript runtime environment
+* Node: JavaScript runtime environment. Node's asynchronous, non-blocking, and single-threaded nature allows requests to be processed without blocking the tread. In addition to Node's clustering module, this makes Node-based web applications highly scalable.
 
-* Express: Node library to handle HTTP requests and additional middleware.
+* Express: Framework built on top of node to create RESTful APIs and additional middleware.
 
 * React: JavaScript library to keep the UI and state in sync through its virtual DOM.
 
