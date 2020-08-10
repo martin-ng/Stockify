@@ -2,16 +2,36 @@
 
 ## Introduction
 
-Stockify is a web application where users can exercise trading stocks without financial risks.
+Stockify is a web application where users can trade stocks.
 Users can register with a unique email, purchase/sell stocks, and audit their transactions history.
 This web app is meant to simulate trading stocks without financial risks.
 
-Please visit the following link and use the below account information. Feel free to also create an account. Have fun!
+Please visit the following link and use the below account information. Feel free to also create an account.
 
-Login: testuser123@gmail.com
-Password: Abc123!@
+Login: richierich@gmail.com
+Password: Iamrich123!@
 
 https://stockify-stocks.herokuapp.com/
+
+## Download
+
+Step by step guide to download repo and start the app.
+
+Clone the project to your selected directory:
+
+> git clone https://github.com/martin-ng/Stockify.git
+
+Install the NPM modules
+
+> npm install
+
+Start the application
+
+> npm start
+
+Visit the following URL to use Stockify!
+
+> http://localhost:8080/
 
 ## User Story
 
@@ -42,13 +62,13 @@ https://stockify-stocks.herokuapp.com/
 
 ## Technologies
 
-* Node: JavaScript runtime environment. Node's asynchronous, non-blocking, and single-threaded nature allows requests to be processed without blocking the tread. In addition to Node's clustering module, this makes Node-based web applications highly scalable.
+* Node: JavaScript runtime environment. Node's asynchronous, non-blocking, and single-threaded nature allows requests to be processed without blocking the main-tread. In addition to Node's clustering module, this makes Node-based web applications highly scalable.
 
 * Express: Framework built on top of node to create RESTful APIs and additional middleware.
 
 * React: JavaScript library to keep the UI and state in sync through its virtual DOM.
 
-* Redux: State management library that allows the app to scale due to uni-directional data flow paradigm.
+* Redux: State management library that allows the app to scale due to bypass React's uni-directional data flow limitation.
 
 * PostgreSQL: Open-source relational database with ACID transactions, optimal for financial related applications that require consistency.
 
@@ -80,6 +100,8 @@ https://stockify-stocks.herokuapp.com/
 5.  React and Redux were used to render the front-end elements. React made it very intuitive to make Stockify a single-page application through its virtual
     DOM. Manipulating the DOM is very expensive, whereas the virtual DOM only makes changes to specific parts of the DOM. Redux complements React by storing global
     state in a central location. This facilitates passing data to deeply nested components effectively by-passing React's uni-directional data flow.
+
+6.  Node's clustering module is implemented to increase processing power for scalability.
 
 ## Images
 

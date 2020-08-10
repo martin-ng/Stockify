@@ -7,13 +7,10 @@ const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
-// const PORT = process.env.PORT || 8080
-// const app = express()
 const socketio = require('socket.io')
 require('dotenv').config()
 const cluster = require('cluster')
 const numWorkers = require('os').cpus().length
-// module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
@@ -122,7 +119,6 @@ async function bootApp() {
   await sessionStore.sync()
   await syncDb()
   await createApp()
-  // await startListening()
 }
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)

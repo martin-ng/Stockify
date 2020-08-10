@@ -4,7 +4,7 @@ const Transactions = db.model('transactions')
 const User = db.model('user')
 
 // Transactions tests written with Mocha and Chai to validate validity of models
-xdescribe('Transactions model', () => {
+describe('Transactions model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
