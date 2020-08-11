@@ -84,7 +84,7 @@ Visit the following URL to use Stockify!
 ## Design Process
 
 1.  Stockify utilizes PostgreSQL for its data model to retain ACID transactions. Stockify's data is normalized into separate tables to elimate redundant data
-    and ensuring data dependencies. Stockify's data is separated into a user's information, stock information, and transaction's history information table.
+    and ensuring data dependencies. Stockify's data is separated into a users, stocks, and transaction's history information table.
 
 2.  Test-driven development was utilized to write REST APIs and the SQL-based data models. Requirements were translated into unit-tests using Mocha and Chai.
     The back-end was then written according to the requirements and refactored to ensure the test-cases pass.
