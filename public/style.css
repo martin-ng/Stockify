@@ -157,6 +157,22 @@ a {
   text-decoration: none;
 }
 
+#card-box {
+  border: 1px solid #c6cdd5;
+  background-color: #fff;
+  width: 60%;
+  margin: 20px auto;
+  position: relative;
+  height: 400px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.card-image {
+  height: 180px;
+  width: 304.5px;
+}
+
 #checkout-button {
   height: 30px;
   width: 100px;
@@ -276,20 +292,39 @@ nav a {
   margin: 1em;
 }
 
+.news-card {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  border: 0;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
 }
 
 #routes-container {
+  /* display: flex;
+  flex-direction: row;
+  height: 100vh; */
+}
+
+#test-container {
   display: flex;
   flex-direction: row;
-  /* height: 100vh; */
 }
 
 .required-field::after {
   content: '*';
   color: red;
+}
+
+#stocknews-container {
+  display: flex;
+  flex-direction: column;
 }
 
 #trade-container {

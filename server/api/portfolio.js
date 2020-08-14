@@ -12,7 +12,7 @@ router.get('/', checkUser, async (req, res, next) => {
         userId: req.user.id
       }
     })
-
+    console.log('process server', process.env.IEX_TEST_API_KEY)
     // adds price pulled from API to each stock object
     for (let stock of portfolio) {
       let symbol = stock.symbol

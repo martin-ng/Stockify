@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getPortfolioThunk} from '../../store'
-import PortfolioList from './portfolioList'
-
+import {PortfolioList} from '../index.js'
+import TradeHome from '../trade/tradeHome'
 const PortfolioHome = props => {
   const {stocks, portfolioValue} = props.portfolio
   const {getPortfolio} = props
@@ -24,18 +24,21 @@ const PortfolioHome = props => {
   }, [])
 
   return (
-    <div id="portfolio-container">
-      <div>
-        <h2>Your Portfolio: ${+portfolioValue.toFixed(2)}</h2>
-      </div>
+    <div id="test-container">
+      <div id="transactions-container">
+        <div>
+          <h2>Your Portfolio: ${+portfolioValue.toFixed(2)}</h2>
+        </div>
 
-      {stocks.length ? (
-        stocks.map(stock => {
-          return <PortfolioList key={stock.id} stock={stock} />
-        })
-      ) : (
-        <h3>You do not own stocks.</h3>
-      )}
+        {stocks.length ? (
+          stocks.map(stock => {
+            return <PortfolioList key={stock.id} stock={stock} />
+          })
+        ) : (
+          <h3>You do not own stocks.</h3>
+        )}
+      </div>
+      <TradeHome />
     </div>
   )
 }

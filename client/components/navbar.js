@@ -12,6 +12,14 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           <NavLink
             className="link-buttons glow-buttons"
             activeClassName="active-link-buttons"
+            to="/news"
+          >
+            News
+          </NavLink>
+
+          <NavLink
+            className="link-buttons glow-buttons"
+            activeClassName="active-link-buttons"
             to="/transactions"
           >
             Transactions
@@ -34,6 +42,13 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         </nav>
       ) : (
         <nav id="nav-menu">
+          <NavLink
+            className="link-buttons glow-buttons"
+            activeClassName="active-link-buttons"
+            to="/stocknews"
+          >
+            News
+          </NavLink>
           <NavLink
             className="link-buttons glow-buttons"
             activeClassName="active-link-buttons"
