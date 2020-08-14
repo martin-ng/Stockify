@@ -29,7 +29,6 @@ const Routes = props => {
       {!isLoggedIn && (
         <Switch>
           <Route exact path="/news" component={StockNewsHome} />
-          {/* <Route path="/" component={Login} /> */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route component={StockNewsHome} />
@@ -41,7 +40,6 @@ const Routes = props => {
           {/* Routes placed here are only available after logging in */}
           <Switch>
             <Route exact path="/news" component={StockNewsHome} />
-            {/* <Route exact path="/" component={PortfolioHome} /> */}
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
             <Route component={PortfolioHome} />
