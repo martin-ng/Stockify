@@ -32,6 +32,7 @@ const Routes = props => {
           {/* <Route path="/" component={Login} /> */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route component={StockNewsHome} />
         </Switch>
       )}
 
