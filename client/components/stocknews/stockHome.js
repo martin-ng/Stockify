@@ -29,21 +29,4 @@ const StockNewsHome = () => {
   )
 }
 
-/**
- * CONTAINER
- */
-// const mapState = state => {
-//   return {
-//     user: state.user,
-//     portfolio: state.portfolio,
-//     isLoggedIn: !!state.user.id
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     getPortfolio: () => dispatch(getPortfolioThunk())
-//   }
-// }
 export default StockNewsHome
-// export default connect(mapState, mapDispatch)(StockNewsHome)
