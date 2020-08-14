@@ -29,7 +29,7 @@ const Routes = props => {
       {!isLoggedIn && (
         <Switch>
           <Route exact path="/" component={StockNewsHome} />
-          <Route path="/" component={Login} />
+          {/* <Route path="/" component={Login} /> */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>
@@ -39,14 +39,14 @@ const Routes = props => {
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
           <Switch>
-            {/* <Route exact path="/" component={StockNewsHome} /> */}
-            <Route exact path="/" component={PortfolioHome} />
+            <Route exact path="/" component={StockNewsHome} />
+            {/* <Route exact path="/" component={PortfolioHome} /> */}
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
-            <Route component={PortfolioHome} />
+            {/* <Route component={PortfolioHome} /> */}
           </Switch>
 
-          <Route component={TradeHome} />
+          {/* <Route component={TradeHome} /> */}
         </Router>
       )}
     </div>

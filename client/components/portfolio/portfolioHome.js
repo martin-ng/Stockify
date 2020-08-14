@@ -25,7 +25,7 @@ const PortfolioHome = props => {
 
   return (
     <div id="test-container">
-      <div id="portfolio-container">
+      <div id="transactions-container">
         <div>
           <h2>Your Portfolio: ${+portfolioValue.toFixed(2)}</h2>
         </div>
@@ -38,10 +38,7 @@ const PortfolioHome = props => {
           <h3>You do not own stocks.</h3>
         )}
       </div>
-
-      <div>
-        <TradeHome />
-      </div>
+      <TradeHome />
     </div>
   )
 }
