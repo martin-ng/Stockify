@@ -28,7 +28,7 @@ const Routes = props => {
       {/* Routes placed here are available to all visitors */}
       {!isLoggedIn && (
         <Switch>
-          <Route exact path="/" component={StockNewsHome} />
+          <Route exact path="/news" component={StockNewsHome} />
           {/* <Route path="/" component={Login} /> */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
@@ -40,11 +40,11 @@ const Routes = props => {
         <Router history={history}>
           {/* Routes placed here are only available after logging in */}
           <Switch>
-            <Route exact path="/" component={StockNewsHome} />
+            <Route exact path="/news" component={StockNewsHome} />
             {/* <Route exact path="/" component={PortfolioHome} /> */}
             <Route path="/portfolio" component={PortfolioHome} />
             <Route path="/transactions" component={TransactionsHome} />
-            {/* <Route component={PortfolioHome} /> */}
+            <Route component={PortfolioHome} />
           </Switch>
 
           {/* <Route component={TradeHome} /> */}

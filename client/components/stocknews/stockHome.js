@@ -1,31 +1,46 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-// import {getPortfolioThunk} from '../../store'
+import axios from 'axios'
 
 const StockNewsHome = () => {
-  //   const {stocks, portfolioValue} = props.portfolio
-  //   const {getPortfolio} = props
+  const [news, setNews] = useState([])
+  const [count, setCount] = useState(0)
 
-  //   useEffect(() => {
-  //     fetchData()
+  const stockNewsAPI = '586d409720d74ca3acf8bca32af34781'
+  const newsAPI =
+    'http://newsapi.org/v2/everything?domains=wsj.com&apiKey=586d409720d74ca3acf8bca32af34781'
+  // useEffect(() => {
+  //   fetchData()
+  //     setCount(count + 1)
+  //     console.log(count)
+  //   function fetchData() {
+  //     // let newsData = await axios.get(newsAPI)
+  //     // console.log('news data', newsData.data.articles)
+  //     // let newArr = newsData.data.articles
+  //     // console.log('newArr', newArr)
+  //     let newArr = [1, 2, 3]
+  //     setNews(newArr)
+  //     setCount(count + 1)
+  //     setCount(count + 1)
+  //     console.log(count)
+  //     setCount(count + 1)
+  //     console.log(count)
+  //     // console.log('news', news)
+  //   }
 
-  //     // this will update the portfolio view every 5000 ms(5 seconds)
-  //     const interval = setInterval(() => {
-  //       console.log('getting portfolio')
-  //       getPortfolio()
-  //     }, 5000)
-
-  //     async function fetchData() {
-  //       await getPortfolio()
-  //     }
-
-  //     return () => clearInterval(interval)
-  //   }, [])
-
+  // }, [])
+  // console.log('news', news)
   return (
-    <div id="stocknews-container">
-      <h1>Helloasdasda</h1>
+    <div>
+      <h1>hi</h1>
     </div>
+    // <div id="stocknews-container">
+    // <h1>HELLO</h1>
+    //   <p>You clicked {count} times</p>
+    //   <button type='submit' onClick={() => setCount(count + 1)}>
+    //     Click me
+    //   </button>
+    // </div>
   )
 }
 
