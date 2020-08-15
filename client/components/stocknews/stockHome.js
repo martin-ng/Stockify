@@ -25,9 +25,8 @@ const StockNewsHome = () => {
 
   return (
     <div id="stocknews-container">
-      <div>
-        <h2>Recent News</h2>
-      </div>
+      <h2 id="recent-news">Recent News</h2>
+
       <div id="card-box">
         {newsList.length ? (
           // prints the transaction history from newest to least recent
