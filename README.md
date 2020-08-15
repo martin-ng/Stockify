@@ -35,30 +35,30 @@ Visit the following URL to use Stockify!
 
 ## User Story
 
-1.  As a new investor, I want to create a new account with my name, email, and password so that I can buy and trade stocks.
+1.  As a user, I want to create a new account with my name, email, and password so that I can buy and trade stocks.
 
-    * My cash balance will default at $5,000.
+    * The user's cash balance is default at \$5,000.00 USD.
     * A user can only register once with any given email.
 
-2.  I want to authenticate via email and password so that I can access my account to view the news, my portfolio, purchase/sell stocks.
+2.  As a user, I want to authenticate via email and password so that I can access my account.
 
-3.  I want to be able to buy shares of stock at its current price by specifying its ticker symbol and the number of shares I want to invest in.
+3.  As a user, I want to buy shares of stock at its current price by specifying its ticker symbol and the number of shares so that I can invest.
 
-    * An investor can only buy whole number(integers) quantities of shares.
-    * An investor can only buy shares if they have enough cash in their account for a given purchase.
-    * An investor can only buy shares if the ticker symbol is valid.
+    * A user can only buy whole number quantities of shares.
+    * A user can only buy shares if they have enough cash in their account for a given purchase.
+    * A user can only buy shares if the ticker symbol is valid.
 
-4.  I want to view a list of all transactions I've made to date (trades) so that I can perform an audit.
+4.  As a user, I want to view a list of all transactions I've made to date (trades) so that I can perform an audit.
 
-5.  I want to view my portfolio (a list of all the stocks I own along with their current values) so that I can review my performance.
+5.  As a user, I want to view my portfolio (a list of all the stocks I own along with their current values) so that I can review my performance.
 
     * Current values should be based on the latest price and quantity owned for a given stock.
     * Each stock owned should only appear once.
 
-6.  I'd like to see the font color of stock symbols and current prices in my portfolio change dynamically to indicate performance.
-    * Red indicates current price is less than the day's open price.
-    * Grey indicates the current price is equal to the day's open price.
-    * Green indicates the current price is greater than the day's open price.
+6.  As a user, I'd like to see the font color of stock symbols and current prices in my portfolio change dynamically to indicate performance.
+    * Display red when the current price is less than the day's open price.
+    * Display grey when the current price is equal to the day's open price.
+    * Display green when the current price is greater than the day's open price.
 
 ## Technologies
 
@@ -97,11 +97,11 @@ Visit the following URL to use Stockify!
     This data is used to indicate the portfolio's performance. A stock that is highlighted red indicates the current value
     is less than the opening value. Green on the other hand indicates the current value is higher than the opening value. Grey indicates it is neutral.
 
-5.  Node's clustering module is implemented to increase processing power for scalability.
-
-6.  React and Redux were used to render the front-end elements. React made it very intuitive to make Stockify a single-page application through its virtual
+5.  React and Redux were used to render the front-end elements. React made it very intuitive to make Stockify a single-page application through its virtual
     DOM. Manipulating the DOM is very expensive, whereas the virtual DOM only makes changes to specific parts of the DOM. Redux complements React by storing global
     state in a central location. This facilitates passing data to deeply nested components effectively by-passing React's uni-directional data flow.
+
+6.  Node's clustering module is implemented to gincrease processing power for scalability.
 
 ## Images
 
@@ -111,12 +111,10 @@ Visit the following URL to use Stockify!
 ![Portfolio](./assets/Portfolio.JPG)
 ![Transactions](./assets/Transactions.JPG)
 
-## Current Progress
-
-1. Implementing a page that renders the most recent news using News API.
-
 ## Future Updates
 
-1.  Create a D3-based component data to give a better visualization of a stock's performance.
+1.  Implement a system to retrieve news regarding stock data.
 
-2.  Implement an in-memory database such as redis to store the user's portfolio; this will drastically reduce the query time.
+2.  Create a D3 based data visualization to graphically display the user's portfolio.
+
+3.  Implement an in-memory database such as redis to store the user's portfolio; this will drastically reduce the query time.
