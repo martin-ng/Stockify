@@ -11,7 +11,12 @@ const NewsCard = props => {
     url,
     urlToImage
   } = props.news
-  console.log('description', description)
+
+  let newDate = publishedAt.split('T')
+  const datePublished = newDate[0]
+  const timePublished = newDate[1].slice(0, 5)
+  const formatDescription = description.slice(0, 200)
+
   return (
     <div>
       <div className="news-card">
@@ -22,9 +27,12 @@ const NewsCard = props => {
           <a href={url} className="card-title">
             {title}
           </a>
-          <h4>{description}</h4>
-          <h4>{publishedAt}</h4>
-          <h4>{title}</h4>
+          <span>
+            <p>
+              {datePublished} {timePublished}
+            </p>
+          </span>
+          <p>{`${formatDescription}...`}</p>
         </div>
       </div>
 

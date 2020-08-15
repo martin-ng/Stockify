@@ -29,7 +29,6 @@ const StockNewsHome = () => {
 
       <div id="card-box">
         {newsList.length ? (
-          // prints the transaction history from newest to least recent
           newsList.map(news => {
             return <NewsCard key={news.id} news={news} />
           })
