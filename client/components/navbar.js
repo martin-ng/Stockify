@@ -72,7 +72,9 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
       <div>
         <h2 id="welcome-message">Welcome back, {user.firstName}</h2>
       </div>
-    ) : null}
+    ) : (
+      <br />
+    )}
   </div>
 )
 

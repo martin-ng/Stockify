@@ -105,6 +105,8 @@ Visit the following URL to use Stockify!
 
 ## Images
 
+![UnloggedRecentNews](./assets/UnloggedRecent.png)
+![LoggedRecentNews](./assets/LoggedRecent.png)
 ![Signup](./assets/Signup.JPG)
 ![Portfolio](./assets/Portfolio.JPG)
 ![Transactions](./assets/Transactions.JPG)

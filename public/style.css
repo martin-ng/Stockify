@@ -467,3 +467,11 @@ small {
   padding-top: 25px;
   padding-bottom: 30px;
 }
+
+#welcome-message-unlogged {
+  display: flex;
+  align-items: center;
+  padding-left: 42px;
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
